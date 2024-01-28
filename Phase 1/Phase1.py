@@ -79,7 +79,59 @@ def getToken(state,file): #function used to obtain token given a state
     file.write("\n")
 
 
-#def lexical_analysis(transition_table, keywords, final_states, decrement_final_states):
+def lexical_analysis(transition_table, keywords, final_states, decrement_final_states):
+    output_file = open('output.txt','w')
+    error_file = open('errors.txt', 'w')
+    with open('Test1.cp', 'r') as file:
+        buffer1 = file.read(BUFFER_SIZE)
+        buffer2 = file.read(BUFFER_SIZE)
+        print("Length of Buffer1")
+        print(len(buffer1))
+        print("Length of Buffer2")
+        print(len(buffer2))
+        while buffer1:
+            current = transition_table[0][START]    #current state
+            i = 0
+            line_count = 1
+            while i < len(buffer1):   #iterates through every char in buffer
+                # Process character in buffer1
+                #print(int(transition_table[ord(char)][current]))
+                print(buffer1[i])
+                previous = current
+                current = int(transition_table[int(ord(buffer1[i]) - 1)][int(current)])
+                print(current)
+                if current in final_states: #Final state reached
+                    print("final state reached: ")
+                    getToken(current,output_file)
+
+                    if current in decrement_final_states: #decrement one char back
+                        print("FINAL STATE REACHED")
+                        print(buffer1[i])
+                        i = i - 1
+
+                    
+                    current = transition_table[0][START]
+                elif current == -1: #Error
+                    print("ERROR")
+                    error_file.write("Char: " +  buffer1[i] + " line #: " + str(line_count))
+                    current = transition_table[0][START]
+
+                if (ord(buffer1[i]) == 10): # /n encountered
+                    line_count += 1
+
+
+                i+= 1
+                
+            
+
+            
+
+            buffer1 = buffer2
+            print("-------------------------------------------BUFFER SWITCH-------------------------------------------")
+            buffer2 = file.read(BUFFER_SIZE)
+        output_file.close()
+        error_file.close()
+
 
 
 
@@ -87,61 +139,6 @@ transition_table = csv_to_2Darray('CP471 -- Transition Table.csv') #Initialize t
 keywords = keywords_to_list('keywords.txt') #initialize list of keywords
 final_states = final_states_to_list('finalStates.txt')
 decrement_final_states = [4,7,10,21,25,29,31,36,40,45,48,50,54,60,67,72,78,80,83]
-
-
-output_file = open('output.txt','w')
-error_file = open('errors.txt', 'w')
-with open('Test1.cp', 'r') as file:
-    buffer1 = file.read(BUFFER_SIZE)
-    buffer2 = file.read(BUFFER_SIZE)
-    print("Length of Buffer1")
-    print(len(buffer1))
-    print("Length of Buffer2")
-    print(len(buffer2))
-    while buffer1:
-        current = transition_table[0][START]    #current state
-        i = 0
-        line_count = 1
-        while i < len(buffer1):   #iterates through every char in buffer
-            # Process character in buffer1
-            #print(int(transition_table[ord(char)][current]))
-            print(buffer1[i])
-            previous = current
-            current = int(transition_table[int(ord(buffer1[i]) - 1)][int(current)])
-            print(current)
-            if current in final_states: #Final state reached
-                print("final state reached: ")
-                getToken(current,output_file)
-
-                if current in decrement_final_states: #decrement one char back
-                    print("FINAL STATE REACHED")
-                    print(buffer1[i])
-                    i = i - 1
-
-                    
-                current = transition_table[0][START]
-            elif current == -1: #Error
-                print("ERROR")
-                error_file.write("Char: " +  buffer1[i] + " line #: " + str(line_count))
-                current = transition_table[0][START]
-
-            if (ord(buffer1[i]) == 10): # /n encountered
-                line_count += 1
-
-
-            i+= 1
-                
-            
-
-            
-
-        buffer1 = buffer2
-        print("-------------------------------------------BUFFER SWITCH-------------------------------------------")
-        buffer2 = file.read(BUFFER_SIZE)
-
-
-print(transition_table[36][0])
+lexical_analysis(transition_table,keywords,final_states,decrement_final_states)
 print(final_states)
-output_file.close()
-error_file.close()
-print(len(buffer1))
+
