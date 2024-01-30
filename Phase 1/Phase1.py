@@ -79,10 +79,10 @@ def getToken(state,file): #function used to obtain token given a state
     file.write("\n")
 
 
-def lexical_analysis(transition_table, keywords, final_states, decrement_final_states):
+def lexical_analysis(transition_table, keywords, final_states, decrement_final_states, file_name):
     output_file = open('output.txt','w')
     error_file = open('errors.txt', 'w')
-    with open('Test1.cp', 'r') as file:
+    with open(file_name, 'r') as file:
         buffer1 = file.read(BUFFER_SIZE)
         buffer2 = file.read(BUFFER_SIZE)
         print("Length of Buffer1")
@@ -139,6 +139,6 @@ transition_table = csv_to_2Darray('CP471 -- Transition Table.csv') #Initialize t
 keywords = keywords_to_list('keywords.txt') #initialize list of keywords
 final_states = final_states_to_list('finalStates.txt')
 decrement_final_states = [4,7,10,21,25,29,31,36,40,45,48,50,54,60,67,72,78,80,83]
-lexical_analysis(transition_table,keywords,final_states,decrement_final_states)
-print(final_states)
-
+file_name = input("Enter the name of the file you want to read from:")
+lexical_analysis(transition_table,keywords,final_states,decrement_final_states,file_name)
+print("Lexical Analysis Complete")
