@@ -1,0 +1,116 @@
+Variable,$,int,double,if,"a,b,c...z",while,print,return,;,def,),",",(,fi,else,od,fed,],<,>,==,<=,>=,<>,+,-,*,/,%,not,then,do,or,and,=,[,"1,2,3,4,5,6,7,8,9,0",integers,doubles
+<program>,,"<program> ::= <fdecls> <declarations> <statement_seq>",<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<fdecls>,<fdecls> ::= ε <fdecls'>,<fdecls> ::= ε <fdecls'>,<fdecls> ::= ε <fdecls'>,,,,,,,<fdecls> ::= <fdec> <fdecls’>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<fdecl's>,<fdecls'> ::= ε ,<fdecls'> ::= ε ,<fdecls'> ::= ε ,,,,,,,<fdecls’> ::= <fdec> <fdecls’>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<fdec>,,,,,,,,,,<fdec> ::= def <type> <fname> ( <params> ) <declarations> <statement_seq> fed,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<params>,<params> ::= ε,<params> ::= <type> <var> <params‘>,<params> ::= <type> <var> <params‘>,,,,,,,,<params> ::= ε ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<params'>,<params> ::= ε ,,,,,,,,,,<params'> ::= ε ,"<params’> ::= , <params>",,,,,,,,,,,,,,,,,,,,,,,,,,,
+<fname>,,,,,"<fname> ::= <id>",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<declarations>,<declarations> ::= ε <declarations’>,<declarations> ::= <decl> ; <declarations’>,"<declarations> ::= <decl> ; <declarations’>
+","<declarations> ::= ε <declarations’>
+","<declarations> ::= ε <declarations’>
+","<declarations> ::= ε <declarations’>
+","<declarations> ::= ε <declarations’>
+","<declarations> ::= ε <declarations’>
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<declarations'>,<declarations’> ::= ε,"<declarations’> ::= <decl> ; <declarations’>
+","<declarations’> ::= <decl> ; <declarations’>
+","<declarations’> ::= ε 
+","<declarations’> ::=  ε 
+","<declarations’> ::=  ε 
+","<declarations’> ::= ε 
+","<declarations’> ::= ε 
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<decl>,,<decl>::= <type> <varlist>,<decl>::= <type> <varlist>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<type>,,"<type> ::= int 
+","<type> ::= double
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<varlist>,,,,,"<varlist> ::= <var> <varlist’>
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<varlist'>,"<varlist’> ::=  ε  
+",,,,,,,,,,,"<varlist’> ::=  , <varlist>",,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement_seq>,,,,"<statement_seq> ::= <statement> <statement_seq’>","<statement_seq> ::= <statement> <statement_seq’>","<statement_seq> ::= <statement> <statement_seq’>","<statement_seq> ::= <statement> <statement_seq’>",<statement_seq> ::= <statement> <statement_seq’>,"<statement_seq> ::= <statement> <statement_seq’>",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement_seq'>,"<statement_seq’> ::= ε 
+",,,,,,,,"<statement_seq’> ::= ; <statement_seq>
+",,,,,"<statement_seq’> ::= ε  
+","<statement_seq’> ::= ε 
+","<statement_seq’> ::= ε 
+","<statement_seq’> ::= ε 
+",,,,,,,,,,,,,,,,,,,,,,
+<statement>,<statement> ::= ε,,,<statement> ::= if <bexpr> then <statement_seq> <statement’> ,"<statement> ::= <var> = <expr>
+",<statement> ::= While <bexpr> do <statement_seq> od,<statement> ::= print <expr>,<statement> ::= return <expr> ,"<statement> ::= ε ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement'>,,,,,,,,,,,,,,"<statement’> ::= fi 
+",,,,,,,,,,,,,,,,,,,,,,,,,
+<expr>,,,,,"<expr> ::= <term> <expr’>",,,,,,,,"<expr> ::= <term> <expr’>",,,,,,,,,,,,,,,,,,,,,,,,,<expr> ::= <term> <expr’>,"<expr> ::= <term> <expr’>
+"
+<expr'>,<expr’> ::=  ε  ,,,,,,,,<expr’> ::= ε  ,,"<expr’> ::= ε  
+","<expr’> ::=  ε  
+",,,,,,"<expr’> ::= ε  
+",<expr’> ::= ε,"<expr’> ::= ε 
+","<expr’> ::= ε 
+","<expr’> ::= ε 
+","<expr’> ::= ε  
+","<expr’> ::=  ε  
+","<expr’> ::= + <term> <expr’> 
+","<expr’> ::= - <term> <expr’>
+",,,,,,,,,,,,,
+<term>,,,,,"<term> ::= <factor> <term’>",,,,,,,,"<term> ::= <factor> <term’>",,,,,,,,,,,,,,,,,,,,,,,,,"<term> ::= <factor> <term’>","<term> ::= <factor> <term’>"
+<term'>,"<term’> ::= ε
+",,,,,,,,,,,,,,,,,,,,,,,,"<term’> ::=  ε
+",<term’> ::= ε,"<term’> ::= * <factor> <term’> 
+",<term’> ::= / <factor> <term’>,"<term’> ::= % <factor> <term’>
+",,,,,,,,,,
+<factor>,,,,,"<factor> ::= <var>
+",,,,,,,,"<factor> ::= (<expr>) 
+",,,,,,,,,,,,,,,,,,,,,,,,,"<factor> ::= <number> 
+","<factor> ::= <number> 
+"
+<exprseq>,"<exprseq> ::= ε
+",,,,"<exprseq> ::= <expr> <exprseq’> 
+",,,,,,"<exprseq> ::= ε",,"<exprseq> ::= ε
+",,,,,,,,,,,,,,,,,,,,,,,,,<exprseq> ::= <expr> <exprseq’>,"<exprseq> ::= <expr> <exprseq’>
+"
+<exprseq'>,"<exprseq’> ::= ε
+",,,,,,,,,,"<exprseq’> ::= ε
+","<exprseq’> ::= , <exprseq>
+",,,,,,,,,,,,,,,,,,,,,,,,,,,
+<bexpr>,,,,,,,,,,,,,"<bexpr> ::= <bterm> <bexpr’>",,,,,,,,,,,,,,,,,"<bexpr> ::= <bterm> <bexpr’>",,,,,,,,,
+<bexpr'>,"<bexpr’> ::= ε
+",,,,,,,,,,"<bexpr’> ::= ε
+",,,,,,,,,,,,,,,,,,,,"<bexpr’> ::= ε
+","<bexpr’> ::= ε
+","<bexpr’> ::= or <bterm> <bexpr’> 
+",,,,,,
+<bterm>,,,,,,,,,,,,,"<bterm> ::= <bfactor> <bterm’>
+",,,,,,,,,,,,,,,,,"<bterm> ::= <bfactor> <bterm’>",,,,,,,,,
+<bterm'>,<bterm’> ::= ε,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"<bterm’> ::= ε
+",<bterm’> ::= and <bfactor> <bterm’>,,,,,
+<bfactor>,,,,,,,,,,,,,"<bfactor> ::= (<bexpr>) | (<expr> <comp> <expr>)
+",,,,,,,,,,,,,,,,,"<bfactor> ::= not <bfactor>
+",,,,,,,,,
+<comp>,,,,,,,,,,,,,,,,,,,"<comp> ::= <
+","<comp> ::= > 
+","<comp> ::= == 
+","<comp> ::= <= 
+","<comp> ::= >=
+",<comp> ::= <>,,,,,,,,,,,,,,,
+<var>,,,,,"<var> ::= <id> <var’>
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<var'>,"<var’> ::= ε
+",,,,,,,,,,,"<var’> ::= ε
+",,,,,,,,,,,,,,,"<var’> ::= ε
+","<var’> ::= ε
+","<var’> ::= ε 
+",,,,,,"<var’> ::= ε 
+","<var’> ::= [<expr>]
+",,,
+<letter>,,,,,"<letter> ::= a | b | c | … | z
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<digit>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"<digit> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0",,
+<id>,,,,,"<id> ::= <letter> <id’>",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<id'>,<id’> ::= ε,,,,"<id’> ::= <letter> <id’>
+",,,,,,,,"<id’> ::= ε
+",,,,,,,,,,,,,,,,,,,,,,,"<id’> ::= ε
+","<id’> ::= <digit> <id’>
+",,
+<number>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,<number> ::= <integer>,<number> ::= <double>
