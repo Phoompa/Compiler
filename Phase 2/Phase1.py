@@ -21,8 +21,8 @@ def final_states_to_list(file_path): #function to convert finalStates.txt into a
         temp_array = [int(line.strip()) for line in file.readlines()]
 
     return temp_array
-
-def getToken(state,file): #function used to obtain token given a state
+ 
+def getToken(state,file,IdentifierString): #function used to obtain token given a state
 
     if (state == 2): #Recognizes operator <=
         file.write("<Operator> , <=")
@@ -73,7 +73,7 @@ def getToken(state,file): #function used to obtain token given a state
         file.write("<Operator> , )")        
         
     elif (state == 21): #Recognizes Identifiers
-        file.write("<Identifier>")
+        file.write("<Identifier> , " + IdentifierString)
 
     elif(state == 25): #Recognizes keyword and
         file.write("<and> , and")
@@ -122,6 +122,12 @@ def getToken(state,file): #function used to obtain token given a state
     
     elif (state == 83): #Recognizes double
         file.write("<double> , double")
+        
+    elif (state == 84) : #Recognizes [
+        file.write("<[> , [")
+        
+    elif (state == 85) : #Recognizes ] 
+        file.write("<]> , ]")
     file.write("\n")
 
 
@@ -135,6 +141,9 @@ def lexical_analysis(transition_table, keywords, final_states, decrement_final_s
         #print(len(buffer1))
         #print("Length of Buffer2")
         #print(len(buffer2))
+        IdentifierStringbuffer = 0
+        IdentifierString = "" #used to store Identifier string value along with token
+        first = 0
         while buffer1:
             current = transition_table[0][START]    #current state
             i = 0
@@ -144,10 +153,28 @@ def lexical_analysis(transition_table, keywords, final_states, decrement_final_s
                 #print(buffer1[i])
                 previous = current
                 current = int(transition_table[int(ord(buffer1[i]) - 1)][int(current)])
+                if first == 0 and current != 20:
+                    if (65 <= ord(buffer1[i]) <= 90) or (97 <= ord(buffer1[i]) <= 122):
+                        first = 1
+                        IdentifierString = IdentifierString + buffer1[i]
+                    
                 #print(current)
+                if current == 20:
+                    if IdentifierStringbuffer == 0: 
+                        if (65 <= ord(buffer1[i-1]) <= 90) or (97 <= ord(buffer1[i-1]) <= 122):
+                            #IdentifierString = IdentifierString + buffer1[i-1]
+                            #IdentifierStringbuffer = 1
+                            print("her")
+                    IdentifierString = IdentifierString + buffer1[i]
+
+
                 if current in final_states: #Final state reached
                     #print("final state reached: ")
-                    getToken(current,output_file)
+                    getToken(current,output_file,IdentifierString)
+                    print(IdentifierString)
+                    IdentifierString = '' #reset identifier String
+                    IdentifierStringbuffer = 0
+                    first = 0
 
                     if current in decrement_final_states: #decrement one char back
                         #print("FINAL STATE REACHED")
@@ -178,57 +205,123 @@ def lexical_analysis(transition_table, keywords, final_states, decrement_final_s
         error_file.close()
 
 #ALL OF THE FUNCTIONS ABOVE THIS LINE ARE PART OF PHASE 1
-def read_tokens_from_file(file_path):
-    with open(file_path, 'r') as file:
-        tokens = file.read().splitlines()
-    tokens.append('$')
-    return tokens
+def parse():
+    #get list of tokens from output.txt
+    tokens = []
+    with open('output.txt', 'r') as file:
+        for line in file:
+            tokens.append(line.strip())
+    tokens.append("$")
+    print(tokens)
+    #parse_prorgram(tokens)
+    return
 
-def parse(tokens, ll1_table):
-    stack = ['$', '<program>']  # Assuming '$' signifies the end of input, and '<program>' is the start symbol.
-    token_index = 0
-    while stack:
-        top = stack.pop()
-        current_token = tokens[token_index]
-        
-        if top in terminals:  # Direct match with token
-            if top == current_token:
-                token_index += 1  # Consume token
-            else:
-                print(f"Error: expected {top}, found {current_token}")
-                break
-        elif top in non_terminals:
-            # Find production rule: ll1_table[non-terminal][terminal]
-            non_terminal_index = non_terminals.index(top)
-            terminal_index = terminals.index(current_token)
-            production_rule = ll1_table[non_terminal_index + 1][terminal_index]  # Offset by 1 due to headers
+
+
+
+def parse_program(tokens, position): # <program>
+    position = parse_fdecls(tokens, position)
+    # Uncomment and implement the following lines as needed
+    position = parse_declarations(tokens, position)
+    position = parse_statement_seq(tokens, position)
+    if tokens[position] == '$':
+        print("Reached the end, parsing successful")
+    return position
+
+def parse_declarations(tokens,position):
+    return
+
+def parse_statement_seq(tokens,position):
+    return
+
+def parse_fdecls(tokens, position):
+    token = token.strip()
+    token = tokens[position].split(',')  # Corrected token extraction
+
+    if token[0] == '<def>':  # Check for '<def>' token
+        position = parse_fdec(tokens, position)  # Parse <fdec>
+    else:
+        print("Error in parsing: fdecls looking for <def>")
+    # Parse <fdecls'> regardless
+    position = parse_fdecls_prime(tokens, position) #Parse <fdecls'>
+  
+    return position
+
+def parse_fdec(tokens, position):
+    position = position + 1 #at this point def is terminal and to be here, current token needed to be def
+    token = token.strip()
+    token = tokens[position].split(',')
+    if token[0] == '<identifier>': #Parse <type>
+        position = parse_type(tokens,position) 
+    
+    
+    if token[0] == '<identifier>': #Parse <id>
+        position = parse_fname(tokens, position)
+   
+    
+    if token[0] == '<Operator>':
+        if token[2] == '(':
+            position = position + 1 #terminal reached
+            token = token.strip()
+            token = tokens[position].split(',')
             
-            if production_rule != 'N/A':
-                # Reverse the production rule to push onto stack correctly
-                for symbol in reversed(production_rule.split()):
-                    if symbol != 'ε':
-                        stack.append(symbol)
-            else:
-                print(f"Error: no rule for {top} with {current_token}")
-                break
-        else:
-            print("Error: unexpected symbol")
-            break
+  
+    if token[0] == 'identifier': #parse params
+        position = parse_params(tokens, position) 
+    
+   
+    if token[0] == '<Operator>':
+        if token[2] == ')':
+            position = position + 1 #terminal reached
+            token = token.strip()
+            token = tokens[position].split(',')
+            
+    
+    if token[0] == '<Identifier>': #parse declarations
+        position = parse_declarations(tokens, position)
         
-        if top == '$' and current_token == '$':
-            print("Parsing successful!")
-            return
+    
+    if token[0] == '<Identifier>' or token[0] == '<if>' or token[0] == '<while>' or token[0] == '<print>' or token[0] == 'return' or token[2] == ';':
+        position = parse_statement_seq(tokens,position)
+    
+    
+    if token[0] == '<Fed>':
+        position = position + 1 #terminal reached
+        token = token.strip()
+        token = tokens[position].split(',')
 
-    if stack:
-        print("Parsing failed: stack not empty.")
-    if token_index < len(tokens):
-        print("Parsing failed: tokens remaining.")
+    return position
 
-# Example usage:
-# tokens = read_tokens_from_file('output.txt')  # Implement this function to read tokens into a list
-# ll1_table = read_ll1_table_from_csv('LL1_table.csv')  # Implement this function to read the LL(1) table into a 2D array
-# parse(tokens, ll1_table)
+def parse_type(tokens, position):
+    #DOnt have the means to distinguish between two different identifiers titled int and double
+    # for the sake of implementing this by the deadline, just going to assume its int
+    position = position + 1
+    token = token.strip()
+    token = tokens[position].split(',')
+    return position
 
+def parse_params(tokens, position):
+    if token[0] == '<identifier>':
+        position = parse_type(tokens, position)
+    return position
+
+def parse_fname(tokens,position):
+    
+    if token[0] == '<Identifier>':
+        position = parse_id(tokens,position)
+    return position
+
+def parse_id(tokens, position):
+    position = parse_letter(tokens,position)
+    return position
+
+def parse_letter(tokens, position):
+    position = position + 1 #Terminal reached
+    token = token.strip()
+    token = tokens[position].split(',')
+    return position
+def parse_fdecls_prime(tokens, position):
+    return
 
 
 transition_table = csv_to_2Darray('CP471 -- Transition Table.csv') #Initialize transition table
@@ -241,5 +334,8 @@ print("Lexical Analysis Complete")
 
 #Starting Phase 2
 #LLTable = csv_to_2Darray('CP471 -- LL(1) Table - Sheet1.csv') #Initialize LL(1) parsing table
-#tokens = Parse('output.txt', LLTable)
+#print("-------------------------------------------STARTING PHASE 2-------------------------------------------")
+#parse()
 #print("Complete")
+#token = "<Operator> , temp"
+#token = token.split(',')

@@ -1,40 +1,110 @@
-<Identifier>
-<Identifier>
-<Operator> , ,
-<Identifier>
+<Identifier> , duble
+<Identifier> , s
 <Operator> , ;
-<Identifier>
-<Operator> , =
-<int>, int
-<Operator> , ;
-<Identifier>
-<Operator> , =
-<int>, int
-<Operator> , ;
-<while> , while
+<def> , def
+<Identifier> , duble
+<Identifier> , f
 <Operator> , (
-<Identifier>
-<Operator> , <
+<Identifier> , duble
+<Identifier> , x
+<Operator> , ,
+<Identifier> , duble
+<Identifier> , y
+<Operator> , )
+<Identifier> , duble
+<Identifier> , a
+<Operator> , ;
+<Identifier> , a
+<Operator> , =
+<Identifier> , x
+<Operator> , +
+<Identifier> , y
+<Operator> , *
+<Identifier> , y
+<Operator> , ;
+<return> , return
+<Identifier> , a
+<fed> , fed
+<Operator> , ;
+<Identifier> , s
+<Operator> , =
+<Identifier> , f
+<Operator> , (
+<double> , double
+<Operator> , ,
 <int>, int
 <Operator> , )
-<do> , do
-<Identifier>
-<Operator> , =
-<Identifier>
 <Operator> , +
-<Identifier>
-<Operator> , *
-<Identifier>
-<Operator> , ;
-<Identifier>
-<Operator> , =
-<Identifier>
+<Identifier> , f
+<Operator> , (
+<double> , double
+<Operator> , ,
+<Operator> , -
+<double> , double
+<Operator> , )
 <Operator> , +
+<Identifier> , f
+<Operator> , (
+<double> , double
+<Identifier> , e
+<Operator> , -
 <int>, int
-<od> , od
+<Identifier> , duble
+<Identifier> , s
+<Operator> , ;
+<def> , def
+<Identifier> , duble
+<Identifier> , f
+<Operator> , (
+<Identifier> , duble
+<Identifier> , x
+<Operator> , ,
+<Identifier> , duble
+<Identifier> , y
+<Operator> , )
+<Identifier> , duble
+<Identifier> , a
+<Operator> , ;
+<Identifier> , a
+<Operator> , =
+<Identifier> , x
+<Operator> , +
+<Identifier> , y
+<Operator> , *
+<Identifier> , y
+<Operator> , ;
+<return> , return
+<Identifier> , a
+<fed> , fed
+<Operator> , ;
+<Identifier> , s
+<Operator> , =
+<Identifier> , f
+<Operator> , (
+<double> , double
+<Operator> , ,
+<int>, int
+<Operator> , )
+<Operator> , +
+<Identifier> , f
+<Operator> , (
+<double> , double
+<Operator> , ,
+<Operator> , -
+<double> , double
+<Operator> , )
+<Operator> , +
+<Identifier> , f
+<Operator> , (
+<double> , double
+<Identifier> , e
+<Operator> , -
+<int>, int
+<Operator> , ,
+<double> , double
+<Operator> , )
 <Operator> , ;
 <print> , print
 <Operator> , (
-<Identifier>
+<Identifier> , s
 <Operator> , )
-<Operator> , ;
