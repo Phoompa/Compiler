@@ -1,36 +1,40 @@
-<def>
-<fed>
-<if>
-<then>
-<else>
-<fi>
-<while>
-<do>
-<od>
-<print>
-<return>
-<or>
-<and>
-<not>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<Operator>
-<int>
-<int>
-<double>
-<double>
-<double>
+<Identifier>
+<Identifier>
+<Operator> , ,
+<Identifier>
+<Operator> , ;
+<Identifier>
+<Operator> , =
+<int>, int
+<Operator> , ;
+<Identifier>
+<Operator> , =
+<int>, int
+<Operator> , ;
+<while> , while
+<Operator> , (
+<Identifier>
+<Operator> , <
+<int>, int
+<Operator> , )
+<do> , do
+<Identifier>
+<Operator> , =
+<Identifier>
+<Operator> , +
+<Identifier>
+<Operator> , *
+<Identifier>
+<Operator> , ;
+<Identifier>
+<Operator> , =
+<Identifier>
+<Operator> , +
+<int>, int
+<od> , od
+<Operator> , ;
+<print> , print
+<Operator> , (
+<Identifier>
+<Operator> , )
+<Operator> , ;
