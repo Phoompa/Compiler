@@ -437,7 +437,7 @@ def parse_factor(tokens, position):
     #first of var
     if token[0] == "<Identifier>":
         position = parse_var(tokens, position)
-    elif token[0] == "<Int>" or token[0] == "<Double>" #first of number
+    elif token[0] == "<Int>" or token[0] == "<Double>": #first of number
         position = parse_number(tokens, position)
     elif token[2] == '(':
         print("Parse successful, ( recognized")
