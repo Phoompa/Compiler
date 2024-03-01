@@ -124,10 +124,10 @@ def getToken(state,file,IdentifierString): #function used to obtain token given 
         file.write("<double> , double")
         
     elif (state == 84) : #Recognizes [
-        file.write("<[> , [")
+        file.write("<Operator> , [")
         
     elif (state == 85) : #Recognizes ] 
-        file.write("<]> , ]")
+        file.write("<Operator> , ]")
     file.write("\n")
 
 
@@ -220,10 +220,13 @@ def parse():
 
 
 def parse_program(tokens, position): # <program>
+    token = token.strip()
+    token = tokens[position].split(',')
     position = parse_fdecls(tokens, position)
-    # Uncomment and implement the following lines as needed
     position = parse_declarations(tokens, position)
     position = parse_statement_seq(tokens, position)
+    token = tokens[position].split(',')
+
     if tokens[position] == '$':
         print("Reached the end, parsing successful")
     return position
@@ -236,27 +239,35 @@ def parse_statement_seq(tokens,position):
 
 def parse_fdecls(tokens, position):
     token = token.strip()
-    token = tokens[position].split(',')  # Corrected token extraction
-
-    if token[0] == '<def>':  # Check for '<def>' token
-        position = parse_fdec(tokens, position)  # Parse <fdec>
+    token = tokens[position].split(',')  
+    position = parse_fdec(tokens, position)
+    token = tokens[position].split(',')  
+    if token[2] == ';':
+        position = position + 1
+        token = tokens[position].split(',')
+        token = token.strip()
+        print("Parse successful, ; recognized")
     else:
-        print("Error in parsing: fdecls looking for <def>")
-    # Parse <fdecls'> regardless
-    position = parse_fdecls_prime(tokens, position) #Parse <fdecls'>
-  
+        print("Parsing error at: <fdecls> -> <fdec>;<fdecls'>")
+    position = parse_fdecls_prime(tokens, position)
+        
     return position
 
 def parse_fdec(tokens, position):
     position = position + 1 #at this point def is terminal and to be here, current token needed to be def
+    print("Parse successful, def recognized")
     token = token.strip()
     token = tokens[position].split(',')
     if token[0] == '<identifier>': #Parse <type>
         position = parse_type(tokens,position) 
+        token = tokens[position].split(',')
+
     
     
     if token[0] == '<identifier>': #Parse <id>
         position = parse_fname(tokens, position)
+        token = tokens[position].split(',')
+
    
     
     if token[0] == '<Operator>':
@@ -267,7 +278,9 @@ def parse_fdec(tokens, position):
             
   
     if token[0] == 'identifier': #parse params
-        position = parse_params(tokens, position) 
+        position = parse_params(tokens, position)
+        token = tokens[position].split(',')
+ 
     
    
     if token[0] == '<Operator>':
@@ -279,10 +292,14 @@ def parse_fdec(tokens, position):
     
     if token[0] == '<Identifier>': #parse declarations
         position = parse_declarations(tokens, position)
+        token = tokens[position].split(',')
+
         
     
     if token[0] == '<Identifier>' or token[0] == '<if>' or token[0] == '<while>' or token[0] == '<print>' or token[0] == 'return' or token[2] == ';':
         position = parse_statement_seq(tokens,position)
+        token = tokens[position].split(',')
+
     
     
     if token[0] == '<Fed>':
@@ -293,20 +310,227 @@ def parse_fdec(tokens, position):
     return position
 
 def parse_type(tokens, position):
-    #DOnt have the means to distinguish between two different identifiers titled int and double
-    # for the sake of implementing this by the deadline, just going to assume its int
+    if token[2] == "int":
+        print("Parse successful, int identifier recognized")
+    if token[2] == "double" or token[2] == "duble":
+        print("Parse successful, int recognized")
     position = position + 1
-    token = token.strip()
     token = tokens[position].split(',')
+    token = token.strip()
+
+    
+    
     return position
 
 def parse_params(tokens, position):
-    if token[0] == '<identifier>':
-        position = parse_type(tokens, position)
+    token = tokens[position].split(',')
+    lookahead_token = tokens[position + 1].split(',')
+    if lookahead_token[0] == '<Operator>' and lookahead_token[2] == ')': #follow set
+        return position
+    else: #first set
+        if token[0] == '<Identifier>':
+            if token[2] == 'int' or token[2] == 'double' or token[2] == 'duble':
+                position = parse_type(tokens, position)
+                position = parse_var(tokens, position)
+                position = parse_params_prime(tokens, position)
+    return position
+
+def parse_var(tokens, position):
+    token = tokens[position].split(',')
+    if token[0] == '<Identifier>':
+        position = parse_id(tokens, position)
+        position = parse_var_prime(tokens, position)
+    else:
+        print("Parsing Error at <var>")
+    return position
+
+def parse_var_prime(tokens, position):
+    token = tokens[position].split(',')
+    lookahead_token = tokens[position + 1].split(',')
+    if lookahead_token[2] == '=' or lookahead_token[2] == ',' or lookahead_token[2] == '*' or lookahead_token[2] == '/' or lookahead_token[2] == '%': #follow set
+        return position
+    else:
+        if token[0] == '<Operator>' and token[2] == '[':
+            print("Parse successful, [] recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+        position = parse_expr(tokens, position)
+        if token[0] == '<Operator>' and token[2] == ']':
+            print("Parse successful, [] recognized")
+            position = position + 1
+            token = tokens[position].split(',')   
+
+    return position
+
+def parse_expr(tokens, position):
+    token = tokens[position].split(',')
+    if token[0] == "<Identifier>" or token[0] == "<Int>" or token[0] == "<Double>":
+        position = parse_term(tokens, position)
+        position = parse_expr_prime(tokens, position)
+    elif token[0] == "<Operator>" and token[2] == '(':
+        position = parse_term(tokens, position)
+        position = parse_expr_prime(tokens, position)
+    return position
+
+def parse_expr_prime(tokens, position):
+    token = tokens[position].split(',')
+    lookahead_token = tokens[position + 1].split(',')
+    #follow set
+    if lookahead_token[2] == ']' or lookahead_token[2] == '<' or lookahead_token[2] == '>' or lookahead_token[2] == '==' or lookahead_token[2] == '<=' or lookahead_token[2] == '>=' or lookahead_token[2] == '<>' or lookahead_token[2] ==  ')' or lookahead_token[2] == ',' or lookahead_token[2] == ';':
+        return position
+    else:
+        if token[2] == '+':
+            print("Parse successful, + recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+        elif token[2] == '-':
+            print("Parse successful, / recognized")
+            position = position + 1
+            token = tokens[position].split('-')
+        else:
+            print("Parsing error at: <expr'>")
+        position = parse_term(tokens, position)
+        position = parse_expr_prime(tokens, position)
+    return position
+        
+def parse_term(tokens, position):
+    token = tokens[position].split(',')
+    if token[0] == "<Identifier>" or token[0] == "<Int>" or token[0] == "<Double>":
+        position = parse_factor(tokens, position)
+        position = parse_term_prime(tokens, position)
+    elif token[0] == "<Operator>" and token[2] == '(':
+        position = parse_factor(tokens, position)
+        position = parse_term_prime(tokens, position)
+    else:
+        print("parsing error at: <term>")
+
+    return position
+    
+def parse_term_prime(tokens, position):
+    token = tokens[position].split(',')
+    lookahead_token = tokens[position + 1].split(',')
+
+    #Follow set
+    if lookahead_token[2] == '+' or lookahead_token[2] == '-':
+        return position
+    else: #first set
+        if token[2] == '*':
+            print("Parse successful, * recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+        elif token[2] == '/':
+            print("Parse successful, / recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+        elif token[2] == '%':
+            print("Parse successful, + recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+        position = parse_factor(tokens, position)
+        position = parse_term_prime(tokens, position)
+         
+    return position
+            
+def parse_factor(tokens, position):
+    token = tokens[position].split(',')
+
+    #first of var
+    if token[0] == "<Identifier>":
+        position = parse_var(tokens, position)
+    elif token[0] == "<Int>" or token[0] == "<Double>" #first of number
+        position = parse_number(tokens, position)
+    elif token[2] == '(':
+        print("Parse successful, ( recognized")
+        position = position + 1
+        token = tokens[position].split(',')
+        position = parse_expr(tokens,position)
+        token = tokens[position].split(',')
+        if token[2] == ')':
+            print("Parse successful, ) recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+        else:
+            print("Parsing error at: <factor> -> (<expr>)")
+    
+    elif token[0] == "<Identifier>":
+        position = parse_fname(token, position)
+        token = tokens[position].split(',')
+        if token[2] == '(':
+            print("Parse successful, ( recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+            position = parse_exprseq(tokens,position)
+            token = tokens[position].split(',')
+            if token[2] == ')':
+                print("Parse successful, ) recognized")
+                position = position + 1
+                token = tokens[position].split(',')
+            else:
+                print("Parsing error at: <factor> -> <fname>(<exprseq>)")
+    
+    return position
+
+def parse_number(tokens, position):
+    token = tokens[position].split(',')
+    if token[0] == "<Int>" or token[0] == "<Double>":
+        print("Parse successful, number recognized")
+        position = position + 1
+        token = tokens[position].split(',')
+        position = parse_exprseq(tokens,position)
+        
+
+    return position
+    
+def parse_exprseq(tokens, position):
+    token = tokens[position].split(',')
+    lookahead_token = tokens[position + 1].split(',')
+    #follow set:
+    if lookahead_token[2] == ')':
+        return position
+    else: #first set
+        if token[0] == '<Identifier>' or token[0] == '<Int>' or token[0] == '<Double>' or token[2] == '(':
+            position = parse_expr(tokens, position)
+            token = tokens[position].split(',')
+            position = parse_exprseq_prime(tokens, position)
+        else:
+            print("Parsing error at <exprseq>")
+
+    return position
+
+def parse_exprseq_prime(tokens, position):
+    token = tokens[position].split(',')
+    lookahead_token = tokens[position + 1].split(',')
+    #follow set
+    if lookahead_token[2] == ')':
+        return position
+    
+    else:
+        if token[2] == ',':
+            print("Parse successful, , recognized")
+            position = position + 1
+            token = tokens[position].split(',')
+            position = parse_exprseq(tokens, position)
+            
+    return position
+def parse_params_prime(tokens, position):
+    token = tokens[position].split(',')
+
+    #follow set
+    lookahead_token = tokens[position + 1].split(',')
+    if lookahead_token[0] == '<Operator>' and lookahead_token[2] == ')':
+        return position
+    else: #first set
+        if token[0] == '<Operator>' and token[2] == ',':
+            position = position + 1
+            token = tokens[position].split(',')
+            token = token.strip()
+            print("Parse successful, , recognized")
+        position = parse_params(tokens, position)
     return position
 
 def parse_fname(tokens,position):
-    
+    token = tokens[position].split(',')
+
     if token[0] == '<Identifier>':
         position = parse_id(tokens,position)
     return position
@@ -315,13 +539,24 @@ def parse_id(tokens, position):
     position = parse_letter(tokens,position)
     return position
 
+    
 def parse_letter(tokens, position):
     position = position + 1 #Terminal reached
     token = token.strip()
     token = tokens[position].split(',')
     return position
+
 def parse_fdecls_prime(tokens, position):
-    return
+    #follow set with epsilon
+    lookahead_token = tokens[position + 1].split(',')
+    if lookahead_token[0] == 'Identifier':
+        if lookahead_token[2] == 'int' or lookahead_token[2] == 'double' or lookahead_token[2] == 'duble':
+            return position
+            
+    else:    # continue with first set    
+        position = parse_fdec(tokens, position)
+        position = parse_fdecls_prime(tokens, position)
+    return position
 
 
 transition_table = csv_to_2Darray('CP471 -- Transition Table.csv') #Initialize transition table
