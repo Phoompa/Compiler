@@ -164,7 +164,7 @@ def lexical_analysis(transition_table, keywords, final_states, decrement_final_s
                         if (65 <= ord(buffer1[i-1]) <= 90) or (97 <= ord(buffer1[i-1]) <= 122):
                             #IdentifierString = IdentifierString + buffer1[i-1]
                             #IdentifierStringbuffer = 1
-                            print("her")
+                            print("")
                     IdentifierString = IdentifierString + buffer1[i]
 
 
@@ -228,6 +228,9 @@ def parse_declarations(tokens,position):
     print("successfully entered parse_declarations")
     lookahead_token = tokens[position + 1].split(',')
     token = tokens[position].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+    
 
     if lookahead_token[0].strip() == '<while>' or lookahead_token[0].strip() == '<if>' or lookahead_token[0].strip() == '<print>' or lookahead_token[0].strip() == '<return>' or lookahead_token[0].strip() == '<Identifier>' : #follow set
         return position
@@ -238,6 +241,7 @@ def parse_declarations(tokens,position):
                 if token[1].strip() == ';':
                     position = position + 1
                     token = tokens[position].split(',')
+                    token = checkComma(token)
                     print("Parse successful: ; recognized")
                     
                 position = parse_declarations_prime(tokens, position)
@@ -250,6 +254,8 @@ def parse_declarations_prime(tokens,position):
     print("successfully entered parse_declarations_prime")
     lookahead_token = tokens[position + 1].split(',')
     token = tokens[position].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
 
     if lookahead_token[0].strip() == '<while>' or lookahead_token[0].strip() == '<if>' or lookahead_token[0].strip() == '<print>' or lookahead_token[0].strip() == '<return>' or lookahead_token[0].strip() == '<Identifier>' : #follow set
         return position
@@ -260,6 +266,7 @@ def parse_declarations_prime(tokens,position):
                 if token[1].strip() == ';':
                     position = position + 1
                     token = tokens[position].split(',')
+                    token = checkComma(token)
                     print("Parse successful: ; recognized")
                     
                     
@@ -272,7 +279,7 @@ def parse_declarations_prime(tokens,position):
 def parse_decl(tokens, position):
     print("successfully entered parse_decl")
     token = tokens[position].split(',')
-
+    token = checkComma(token)
     if token[0].strip() == '<Identifier>':
         if token[1].strip() == 'int' or token[1].strip() == 'double' or token[1].strip() == 'duble':
             position = parse_type(tokens,position)
@@ -283,6 +290,8 @@ def parse_decl(tokens, position):
 def parse_varlist(tokens, position):
     print("successfully entered parse_varlist")
     token = tokens[position].split(',')
+    
+    token = checkComma(token)
 
     if token[0].strip() == '<Identifier>':
         position = parse_var(tokens, position)
@@ -293,7 +302,9 @@ def parse_varlist_prime(tokens, position):
     print("successfully entered parse_varlist_prime")
     lookahead_token = tokens[position + 1].split(',')
     token = tokens[position].split(',')
-
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+        
     if lookahead_token[1].strip() == ';': #follow set
         return position
     else: #first set
@@ -301,6 +312,7 @@ def parse_varlist_prime(tokens, position):
             print("Parse successful: , recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Error at <varlist'>")
         position = parse_varlist(tokens, position)
@@ -310,6 +322,8 @@ def parse_varlist_prime(tokens, position):
 def parse_statement_seq(tokens,position):
     print("successfully entered parse_statement_seq")
     token = tokens[position].split(',')
+    token = checkComma(token)
+  
     if token[0].strip() == '<if>' or token[0].strip() == '<Identifier>' or token[0].strip() == '<while>'  or token[0].strip() == '<print>' or token[0].strip() == '<return>' or token[1].strip() == ';':
         position = parse_statement(tokens, position)
         position = parse_statement_seq_prime(tokens, position)
@@ -319,6 +333,9 @@ def parse_statement_seq_prime(tokens, position):
     print("successfully entered parse_statement_seq_prime")
     lookahead_token = tokens[position + 1].split(',')
     token = tokens[position].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+        
     if lookahead_token[0].strip() == '<fi>' or lookahead_token[0].strip() == '<else>' or lookahead_token[0].strip() == '<od>' or lookahead_token[0].strip() == '<fed>' or lookahead_token[1].strip() == '$':#follow set
         return position
     else: # first set
@@ -326,6 +343,7 @@ def parse_statement_seq_prime(tokens, position):
             print("Parse successful: ; recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at: <statement_seq'>")
         position = parse_statement_seq(tokens, position)
@@ -336,7 +354,9 @@ def parse_statement(tokens, position):
     print("successfully entered parse_statement")
     lookahead_token = tokens[position + 1].split(',')
     token = tokens[position].split(',')
-
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+        
     if lookahead_token[1].strip() == ';':#follow set
         return position
     #elif below for: if <bexpr> then <statement_seq><statement'>
@@ -344,11 +364,13 @@ def parse_statement(tokens, position):
         print("Parse successful: if recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_bexpr(tokens, position)
         if token[0].strip() == '<then>':
             print("Parse successful: <then> recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error: <statement>")
         position = parse_statement_seq(tokens, position)
@@ -361,6 +383,7 @@ def parse_statement(tokens, position):
             print("Parse successful: = recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
 
         else:
             print("Parse error at <statement>")
@@ -371,11 +394,13 @@ def parse_statement(tokens, position):
         print("Parse successful: while recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_bexpr(tokens, position)
         if token[0].strip() == '<do>':
             print("Parse successful: do recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at <statement>")
         position = parse_statement_seq(tokens, position)
@@ -383,6 +408,7 @@ def parse_statement(tokens, position):
             print("Parse successful: od recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at <statement>")
     #elif for: print <expr>
@@ -390,18 +416,23 @@ def parse_statement(tokens, position):
         print("Parse successful: print recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_expr(tokens, position)
     #elif for: Return <expr> 
     elif token[0].strip() == '<return>':
         print("Parse successful: return recognized")
         position = position + 1
         token = tokens[position].split(',') 
+        token = checkComma(token)
         position = parse_expr(tokens, position)      
     return position
 
 def parse_bexpr(tokens, position):
     print("successfully entered parse_bexpr")
     token = tokens[position].split(',')
+    token = checkComma(token)
+    
+
     if token[1].strip() == '(' or token[0].strip() == '<not>':
         position = parse_bterm(tokens, position)
         position = parse_bexpr_prime(tokens, position)
@@ -413,6 +444,9 @@ def parse_bexpr_prime(tokens, position):
     print("successfully entered parse_bexpr_prime")
     lookahead_token = tokens[position + 1].split(',')
     token = tokens[position].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+        
     if lookahead_token[1].strip() == ')' or lookahead_token[0].strip() == '<then>' or lookahead_token[0].strip() == '<do>':#follow set
         return position
     
@@ -421,6 +455,7 @@ def parse_bexpr_prime(tokens, position):
             print("Parse successful: or recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at <bexpr'>")
             position = parse_bterm(tokens, position)
@@ -431,6 +466,10 @@ def parse_bexpr_prime(tokens, position):
 def parse_bterm(tokens, position):
     print("successfully entered parse_bterm")
     token = tokens[position].split(',')
+    
+    token = checkComma(token)
+       
+    
     if token[1].strip() == '(' or token[0].strip() == '<not>':
         position = parse_bfactor(tokens, position)
         position = parse_bterm_prime(tokens, position)
@@ -442,6 +481,8 @@ def parse_bterm_prime(tokens, position):
     print("successfully entered parse_bterm_prime")
     lookahead_token = tokens[position + 1].split(',')
     token = tokens[position].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
 
     if lookahead_token[0].strip() == '<or>':#follow set
         return position
@@ -451,6 +492,7 @@ def parse_bterm_prime(tokens, position):
             print("Parse successful: and recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at <bterm'>")
         
@@ -462,6 +504,7 @@ def parse_bterm_prime(tokens, position):
 def parse_bfactor(tokens, position):
     print("successfully entered parse_bfactor")
     token = tokens[position].split(',')
+    token = checkComma(token)
     if token[1].strip() == '(':
         print("Parse successful: ( recognized")
         position = parse_bexpr(tokens, position)
@@ -469,12 +512,14 @@ def parse_bfactor(tokens, position):
             print("Parse successful: ) recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at <bfactor>")
     elif token[1].strip() == '(':
         print("Parse successful: ( recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_expr(tokens, position)
         position = parse_comp(tokens, position)
         position = parse_expr(tokens, position)
@@ -482,6 +527,7 @@ def parse_bfactor(tokens, position):
             print("Parse successful: ) recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at <bfactor>")
 
@@ -489,6 +535,7 @@ def parse_bfactor(tokens, position):
         print("Parse successful: not recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_bfactor(tokens, position)
     else:
         print("Parse error at <bfactor>")
@@ -497,31 +544,38 @@ def parse_bfactor(tokens, position):
 def parse_comp(tokens, position):
     print("successfully entered parse_comp")
     token = tokens[position].split(',')
-
+    
+    token = checkComma(token)
     if token[1].strip() == '<':
         print("Parse successful: < recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     elif token[1].strip() == '>':
         print("Parse successful: > recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     elif token[1].strip() == '==':
         print("Parse successful: == recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     elif token[1].strip() == '<=':
         print("Parse successful: <= recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     elif token[1].strip() == '>=':
         print("Parse successful: >= recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     elif token[1].strip() == '<>':
         print("Parse successful: <> recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     else:
         print("Parse error at <comp>")
 
@@ -531,19 +585,28 @@ def parse_comp(tokens, position):
 def parse_statement_prime(tokens, position):
     print("successfully entered parse_statement_prime")
     token = tokens[position].split(',')
+    
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+       
+    
+
     if token[0].strip() == '<fi>':
         print("Parse successful: fi recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     elif token[0].strip() == '<else>':
         print("Parse successful: else recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_statement_seq(tokens, position)
         if token[0].strip() == '<fi>':
             print("Parse successful: fi recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         else:
             print("Parse error at <statement'>")
     else:
@@ -552,7 +615,9 @@ def parse_statement_prime(tokens, position):
 
 def parse_fdecls(tokens, position):
     print("successfully entered parse_fdecls")
-    token = tokens[position].split(',')  
+    token = tokens[position].split(',')
+    token = checkComma(token)
+   
     print(position)
     print(token[0])
     print(token[1])
@@ -564,6 +629,7 @@ def parse_fdecls(tokens, position):
     if token[1].strip() == ';':
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         print("Parse successful, ; recognized")
     else:
         print("Parsing error at: <fdecls> -> <fdec>;<fdecls'>")
@@ -577,6 +643,10 @@ def parse_fdec(tokens, position):
     position = position + 1 #at this point def is terminal and to be here, current token needed to be def
     
     token = tokens[position].split(',')
+    
+    token = checkComma(token)
+    
+    
     if token[0].strip() == '<identifier>': #Parse <type>
         position = parse_type(tokens,position) 
         token = tokens[position].split(',')
@@ -593,6 +663,7 @@ def parse_fdec(tokens, position):
         if token[1].strip() == '(':
             position = position + 1 #terminal reached
             token = tokens[position].split(',')
+            token = checkComma(token)
             
   
     if token[0].strip() == 'identifier': #parse params
@@ -605,6 +676,7 @@ def parse_fdec(tokens, position):
         if token[1].strip() == ')':
             position = position + 1 #terminal reached
             token = tokens[position].split(',')
+            token = checkComma(token)
             
     
     if token[0].strip() == '<Identifier>': #parse declarations
@@ -621,6 +693,7 @@ def parse_fdec(tokens, position):
     if token[0].strip() == '<Fed>':
         position = position + 1 #terminal reached
         token = tokens[position].split(',')
+        token = checkComma(token)
 
     return position
 
@@ -632,6 +705,7 @@ def parse_type(tokens, position):
         print("Parse successful, int recognized")
     position = position + 1
     token = tokens[position].split(',')
+    token = checkComma(token)
 
     
     
@@ -641,6 +715,9 @@ def parse_params(tokens, position):
     print("successfully entered parse_params")
     token = tokens[position].split(',')
     lookahead_token = tokens[position + 1].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+        
     if lookahead_token[0].strip() == '<Operator>' and lookahead_token[1].strip() == ')': #follow set
         return position
     else: #first set
@@ -654,6 +731,8 @@ def parse_params(tokens, position):
 def parse_var(tokens, position):
     print("successfully entered parse_var")
     token = tokens[position].split(',')
+    token = checkComma(token)
+    
     if token[0].strip() == '<Identifier>':
         position = parse_id(tokens, position)
         position = parse_var_prime(tokens, position)
@@ -665,6 +744,9 @@ def parse_var_prime(tokens, position):
     print("successfully entered parse_var_prime")
     token = tokens[position].split(',')
     lookahead_token = tokens[position + 1].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+        
     if lookahead_token[1].strip() == '=' or lookahead_token[1].strip() == ',' or lookahead_token[1].strip() == '*' or lookahead_token[1].strip() == '/' or lookahead_token[1].strip() == '%': #follow set
         return position
     else:
@@ -672,29 +754,33 @@ def parse_var_prime(tokens, position):
             print("Parse successful, [] recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         position = parse_expr(tokens, position)
         if token[0].strip() == '<Operator>' and token[1].strip() == ']':
             print("Parse successful, [] recognized")
             position = position + 1
             token = tokens[position].split(',')   
+            token = checkComma(token)
 
     return position
 
 def parse_expr(tokens, position):
     print("successfully entered parse_expr")
     token = tokens[position].split(',')
-    if token[0].strip() == "<Identifier>" or token[0].strip() == "<Int>" or token[0].strip() == "<Double>":
+    token = checkComma(token)
+   
+    if token[0].strip() == "<Identifier>" or token[0].strip() == "<Int>" or token[0].strip() == "<Double>" or token[1].strip() == '(':
         position = parse_term(tokens, position)
         position = parse_expr_prime(tokens, position)
-    elif token[0].strip() == "<Operator>" and token[1].strip() == '(':
-        position = parse_term(tokens, position)
-        position = parse_expr_prime(tokens, position)
+        print("")
     return position
 
 def parse_expr_prime(tokens, position):
     print("successfully entered parse_expr_prime")
     token = tokens[position].split(',')
     lookahead_token = tokens[position + 1].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
     #follow set
     if lookahead_token[1].strip() == ']' or lookahead_token[1].strip() == '<' or lookahead_token[1].strip() == '>' or lookahead_token[1].strip() == '==' or lookahead_token[1].strip() == '<=' or lookahead_token[1].strip() == '>=' or lookahead_token[1].strip() == '<>' or lookahead_token[1].strip() ==  ')' or lookahead_token[1].strip() == ',' or lookahead_token[1].strip() == ';':
         return position
@@ -703,10 +789,12 @@ def parse_expr_prime(tokens, position):
             print("Parse successful, + recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         elif token[1].strip() == '-':
             print("Parse successful, / recognized")
             position = position + 1
             token = tokens[position].split('-')
+            token = checkComma(token)
         else:
             print("Parsing error at: <expr'>")
         position = parse_term(tokens, position)
@@ -716,6 +804,9 @@ def parse_expr_prime(tokens, position):
 def parse_term(tokens, position):
     print("successfully entered parse_term")
     token = tokens[position].split(',')
+    token = checkComma(token)
+    
+  
     print("Token at Parse_term")
     print(token)
     if token[0].strip() == "<Identifier>" or token[0].strip() == "<Int>" or token[0].strip() == "<Double>":
@@ -735,11 +826,11 @@ def parse_term_prime(tokens, position):
     token = tokens[position].split(',')
     lookahead_token = tokens[position + 1].split(',')
     print("Token at parse_term_prime")
-    if token[1].strip() ==  "": #Error where <Operator>, , gets split incorrectly. token[1] becomes nothing
-        token[1] = ','
-        print("Token at parse_term_prime")
-        print(token[0])
-        print(token[1])
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+    print("Token at parse_term_prime")
+    print(token[0])
+    print(token[1])
 
     #Follow set
     if lookahead_token[1].strip() == '+' or lookahead_token[1].strip() == '-':
@@ -749,14 +840,20 @@ def parse_term_prime(tokens, position):
             print("Parse successful, * recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
         elif token[1].strip() == '/':
             print("Parse successful, / recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
+
         elif token[1].strip() == '%':
             print("Parse successful, + recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
+            
+
         position = parse_factor(tokens, position)
         position = parse_term_prime(tokens, position)
          
@@ -766,15 +863,7 @@ def parse_factor(tokens, position):
     print("successfully entered parse_factor")
     token = tokens[position].split(',')
     print("token at parse_factor")
-    
-
-    #print(token[0])
-    #print(token[1])
-    if token[1].strip() ==  "": #Error where <Operator>, , gets split incorrectly. token[1] becomes nothing
-        token[1] = ','
-        print("Token at parse_factor")
-        print(token[0])
-        print(token[1])
+    token = checkComma(token)
         
     #first of var
     if token[0].strip() == "<Identifier>":
@@ -786,12 +875,18 @@ def parse_factor(tokens, position):
         print("Parse successful, ( recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_expr(tokens,position)
         token = tokens[position].split(',')
+        token = checkComma(token)
+
         if token[1].strip() == ')':
             print("Parse successful, ) recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
+            
+
         else:
             print("Parsing error at: <factor> -> (<expr>)")
     
@@ -803,12 +898,17 @@ def parse_factor(tokens, position):
             print("Parse successful, ( recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
             position = parse_exprseq(tokens,position)
             token = tokens[position].split(',')
+            token = checkComma(token)
+
             if token[1].strip() == ')':
                 print("Parse successful, ) recognized")
                 position = position + 1
                 token = tokens[position].split(',')
+                token = checkComma(token)
+
             else:
                 print("Parsing error at: <factor> -> <fname>(<exprseq>)")
     
@@ -817,10 +917,12 @@ def parse_factor(tokens, position):
 def parse_number(tokens, position):
     print("successfully entered parse_number")
     token = tokens[position].split(',')
+    token = checkComma(token)
     if token[0].strip() == "<Int>" or token[0].strip() == "<Double>":
         print("Parse successful, number recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
         position = parse_exprseq(tokens,position)
         
 
@@ -830,6 +932,10 @@ def parse_exprseq(tokens, position):
     print("successfully entered parse_exprseq")
     token = tokens[position].split(',')
     lookahead_token = tokens[position + 1].split(',')
+    
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+        
     #follow set:
     if lookahead_token[1].strip() == ')':
         return position
@@ -847,6 +953,8 @@ def parse_exprseq_prime(tokens, position):
     print("successfully entered parse_exprseq_prime")
     token = tokens[position].split(',')
     lookahead_token = tokens[position + 1].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
     #follow set
     if lookahead_token[1].strip() == ')':
         return position
@@ -856,21 +964,24 @@ def parse_exprseq_prime(tokens, position):
             print("Parse successful, , recognized")
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
             position = parse_exprseq(tokens, position)
             
     return position
 def parse_params_prime(tokens, position):
     print("successfully entered parse_params_prime")
     token = tokens[position].split(',')
-
     #follow set
     lookahead_token = tokens[position + 1].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
     if lookahead_token[0].strip() == '<Operator>' and lookahead_token[1].strip() == ')':
         return position
     else: #first set
         if token[0].strip() == '<Operator>' and token[1].strip() == ',':
             position = position + 1
             token = tokens[position].split(',')
+            token = checkComma(token)
             print("Parse successful, , recognized")
         position = parse_params(tokens, position)
     return position
@@ -878,6 +989,8 @@ def parse_params_prime(tokens, position):
 def parse_fname(tokens,position):
     print("successfully entered parse_fname")
     token = tokens[position].split(',')
+    token = checkComma(token)
+   
 
     if token[0].strip() == '<Identifier>':
         position = parse_id(tokens,position)
@@ -892,6 +1005,10 @@ def parse_id_prime(tokens, position):
     print("successfully entered parse_id_prime")
     token = tokens[position].split(',')
     lookahead_token = tokens[position + 1].split(',')
+    token = checkComma(token)
+    lookahead_token = checkComma(lookahead_token)
+      
+    
     if lookahead_token[1].strip() == '[' or lookahead_token[1].strip() == '(': # follow set
         return position
     else:
@@ -910,10 +1027,13 @@ def parse_id_prime(tokens, position):
 def parse_letter(tokens, position):
     print("successfully entered parse_letter")
     token = tokens[position].split(',')
+    token = checkComma(token)
+    
     if token[0].strip() == '<Identifier>':
         print("Parse successful: letter recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     else:
         print("Parse error at <letter>")
 
@@ -927,6 +1047,7 @@ def parse_digit(tokens, position):
         print("Parse successful: digit recognized")
         position = position + 1
         token = tokens[position].split(',')
+        token = checkComma(token)
     else:
         print("Parse error at <digit>")
 
@@ -938,6 +1059,8 @@ def parse_fdecls_prime(tokens, position):
     #follow set with epsilon
     if token[1].strip() != "$":
         lookahead_token = tokens[position + 1].split(',')
+        token = checkComma(token)
+        lookahead_token = checkComma(lookahead_token)
         if lookahead_token[0].strip() == 'Identifier':
             if lookahead_token[1].strip() == 'int' or lookahead_token[1].strip() == 'double' or lookahead_token[1].strip() == 'duble':
                 return position
@@ -959,6 +1082,13 @@ def parse():
     #print(tokens)
     parse_program(tokens,0)
     return
+
+def checkComma(token):
+    if token[1].strip() ==  "": #Error where <Operator>, , gets split incorrectly. token[1] becomes nothing
+            token[1] = ','
+    return token
+    
+    
 
 transition_table = csv_to_2Darray('CP471 -- Transition Table.csv') #Initialize transition table
 keywords = keywords_to_list('keywords.txt') #initialize list of keywords
