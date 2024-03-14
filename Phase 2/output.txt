@@ -1,40 +1,78 @@
+<def> , def
 <Identifier> , int
-<Identifier> , x
-<Operator> , ,
-<Identifier> , i
-<Operator> , ;
-<Identifier> , x
-<Operator> , =
-<int>, int
-<Operator> , ;
-<Identifier> , i
-<Operator> , =
-<int>, int
-<Operator> , ;
-<while> , while
+<Identifier> , gcd
 <Operator> , (
-<Identifier> , i
-<Operator> , <
-<int>, int
+<Identifier> , int
+<Identifier> , a
+<Operator> , ,
+<Identifier> , int
+<Identifier> , b
 <Operator> , )
-<do> , do
-<Identifier> , x
-<Operator> , =
-<Identifier> , x
-<Operator> , +
-<Identifier> , i
-<Operator> , *
-<Identifier> , i
-<Operator> , ;
-<Identifier> , i
-<Operator> , =
-<Identifier> , i
-<Operator> , +
-<int>, int
-<od> , od
+<if> , if
+<Operator> , (
+<Identifier> , a
+<Operator> , ==
+<Identifier> , b
+<Operator> , )
+<then> , then
+<return> , return
+<Operator> , (
+<Identifier> , a
+<Operator> , )
+<fi> , fi
+<if> , if
+<Operator> , (
+<Identifier> , a
+<Operator> , >
+<Identifier> , b
+<Operator> , )
+<then> , then
+<return> , return
+<Operator> , (
+<Identifier> , gcd
+<Operator> , (
+<Identifier> , a
+<Operator> , -
+<Identifier> , b
+<Operator> , ,
+<Identifier> , b
+<Operator> , )
+<Operator> , )
+<else> , else
+<return> , return
+<Operator> , (
+<Identifier> , gcd
+<Operator> , (
+<Identifier> , a
+<Operator> , ,
+<Identifier> , b
+<Operator> , -
+<Identifier> , a
+<Operator> , )
+<Operator> , )
+<fi> , fi
+<fed> , fed
 <Operator> , ;
 <print> , print
+<Identifier> , gcd
 <Operator> , (
-<Identifier> , x
+<int>, int
+<Operator> , ,
+<int>, int
 <Operator> , )
 <Operator> , ;
+<print> , print
+<int>, int
+<Operator> , ;
+<Identifier> , p2
+<Operator> , *
+<Operator> , (
+<Identifier> , gcd
+<Operator> , (
+<int>, int
+<Operator> , ,
+<int>, int
+<Operator> , )
+<Operator> , +
+<int>, int
+<Operator> , )
