@@ -1,116 +1,49 @@
-Variable,$,int,double,if,"a,b,c...z",while,print,return,;,def,),",",(,fi,else,od,fed,],<,>,==,<=,>=,<>,+,-,*,/,%,not,then,do,or,and,=,[,"1,2,3,4,5,6,7,8,9,0",integers,doubles
-<program>,N/A,"<program> ::= <fdecls> <declarations> <statement_seq>",<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,<program> ::= <fdecls> <declarations> <statement_seq>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<fdecls>,<fdecls> ::= ε <fdecls'>,<fdecls> ::= ε <fdecls'>,<fdecls> ::= ε <fdecls'>,N/A,N/A,N/A,N/A,N/A,N/A,<fdecls> ::= <fdec> <fdecls’>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<fdecl's>,<fdecls'> ::= ε ,<fdecls'> ::= ε ,<fdecls'> ::= ε ,N/A,N/A,N/A,N/A,N/A,N/A,<fdecls’> ::= <fdec> <fdecls’>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<fdec>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,<fdec> ::= def <type> <fname> ( <params> ) <declarations> <statement_seq> fed,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<params>,<params> ::= ε,<params> ::= <type> <var> <params‘>,<params> ::= <type> <var> <params‘>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,<params> ::= ε ,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<params'>,<params> ::= ε ,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,<params'> ::= ε ,"<params’> ::= , <params>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<fname>,N/A,N/A,N/A,N/A,"<fname> ::= <id>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<declarations>,<declarations> ::= ε <declarations’>,<declarations> ::= <decl> ; <declarations’>,"<declarations> ::= <decl> ; <declarations’>
-","<declarations> ::= ε <declarations’>
-","<declarations> ::= ε <declarations’>
-","<declarations> ::= ε <declarations’>
-","<declarations> ::= ε <declarations’>
-","<declarations> ::= ε <declarations’>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<declarations'>,<declarations’> ::= ε,"<declarations’> ::= <decl> ; <declarations’>
-","<declarations’> ::= <decl> ; <declarations’>
-","<declarations’> ::= ε 
-","<declarations’> ::=  ε 
-","<declarations’> ::=  ε 
-","<declarations’> ::= ε 
-","<declarations’> ::= ε 
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<decl>,,<decl>::= <type> <varlist>,<decl>::= <type> <varlist>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<type>,N/A,"<type> ::= int 
-","<type> ::= double
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<varlist>,N/A,N/A,N/A,N/A,"<varlist> ::= <var> <varlist’>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<varlist'>,"<varlist’> ::=  ε  
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<varlist’> ::=  , <varlist>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<statement_seq>,N/A,N/A,N/A,"<statement_seq> ::= <statement> <statement_seq’>","<statement_seq> ::= <statement> <statement_seq’>","<statement_seq> ::= <statement> <statement_seq’>","<statement_seq> ::= <statement> <statement_seq’>",<statement_seq> ::= <statement> <statement_seq’>,"<statement_seq> ::= <statement> <statement_seq’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<statement_seq'>,"<statement_seq’> ::= ε 
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<statement_seq’> ::= ; <statement_seq>
-",N/A,N/A,N/A,N/A,"<statement_seq’> ::= ε  
-","<statement_seq’> ::= ε 
-","<statement_seq’> ::= ε 
-","<statement_seq’> ::= ε 
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<statement>,<statement> ::= ε,N/A,N/A,<statement> ::= if <bexpr> then <statement_seq> <statement’> ,"<statement> ::= <var> = <expr>
-",<statement> ::= While <bexpr> do <statement_seq> od,<statement> ::= print <expr>,<statement> ::= return <expr> ,"<statement> ::= ε ",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<statement'>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<statement’> ::= fi 
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<expr>,N/A,N/A,N/A,N/A,"<expr> ::= <term> <expr’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<expr> ::= <term> <expr’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,<expr> ::= <term> <expr’>,"<expr> ::= <term> <expr’>
-"
-<expr'>,<expr’> ::=  ε  ,N/A,N/A,N/A,N/A,N/A,N/A,N/A,<expr’> ::= ε  ,N/A,"<expr’> ::= ε  
-","<expr’> ::=  ε  
-",N/A,N/A,N/A,N/A,N/A,"<expr’> ::= ε  
-",<expr’> ::= ε,"<expr’> ::= ε 
-","<expr’> ::= ε 
-","<expr’> ::= ε 
-","<expr’> ::= ε  
-","<expr’> ::=  ε  
-","<expr’> ::= + <term> <expr’> 
-","<expr’> ::= - <term> <expr’>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<term>,,N/A,N/A,N/A,"<term> ::= <factor> <term’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<term> ::= <factor> <term’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<term> ::= <factor> <term’>","<term> ::= <factor> <term’>"
-<term'>,"<term’> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<term’> ::=  ε
-",<term’> ::= ε,"<term’> ::= * <factor> <term’> 
-",<term’> ::= / <factor> <term’>,"<term’> ::= % <factor> <term’>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<factor>,N/A,N/A,N/A,N/A,"<factor> ::= <var>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<factor> ::= (<expr>) 
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<factor> ::= <number> 
-","<factor> ::= <number> 
-"
-<exprseq>,"<exprseq> ::= ε
-",N/A,N/A,N/A,"<exprseq> ::= <expr> <exprseq’> 
-",N/A,N/A,N/A,N/A,N/A,"<exprseq> ::= ε",N/A,"<exprseq> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,<exprseq> ::= <expr> <exprseq’>,"<exprseq> ::= <expr> <exprseq’>
-"
-<exprseq'>,"<exprseq’> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<exprseq’> ::= ε
-","<exprseq’> ::= , <exprseq>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<bexpr>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,,N/A,"<bexpr> ::= <bterm> <bexpr’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bexpr> ::= <bterm> <bexpr’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<bexpr'>,"<bexpr’> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bexpr’> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bexpr’> ::= ε
-","<bexpr’> ::= ε
-","<bexpr’> ::= or <bterm> <bexpr’> 
-",N/A,N/A,N/A,N/A,N/A,N/A
-<bterm>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bterm> ::= <bfactor> <bterm’>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bterm> ::= <bfactor> <bterm’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<bterm'>,<bterm’> ::= ε,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bterm’> ::= ε
-",<bterm’> ::= and <bfactor> <bterm’>,N/A,N/A,N/A,N/A,N/A
-<bfactor>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bfactor> ::= (<bexpr>) | (<expr> <comp> <expr>)
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<bfactor> ::= not <bfactor>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<comp>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<comp> ::= <
-","<comp> ::= > 
-","<comp> ::= == 
-","<comp> ::= <= 
-","<comp> ::= >=
-",<comp> ::= <>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<var>,N/A,N/A,N/A,N/A,"<var> ::= <id> <var’>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<var'>,"<var’> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<var’> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<var’> ::= ε
-","<var’> ::= ε
-","<var’> ::= ε 
-",N/A,N/A,N/A,N/A,N/A,"<var’> ::= ε 
-","<var’> ::= [<expr>]
-",N/A,N/A,N/A
-<letter>,N/A,N/A,N/A,N/A,"<letter> ::= a | b | c | … | z
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<digit>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<digit> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0",N/A,N/A
-<id>,N/A,N/A,N/A,N/A,"<id> ::= <letter> <id’>",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-<id'>,<id’> ::= ε,N/A,N/A,N/A,"<id’> ::= <letter> <id’>
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<id’> ::= ε
-",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,"<id’> ::= ε
-","<id’> ::= <digit> <id’>
-",N/A,N/A
-<number>,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,<number> ::= <integer>,<number> ::= <double>
+Variable,$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>~while,<print>~print,<return>~return,<Operator>~;,<def>~def,<Operator>~),"<Operator>~,",<Operator>~(,<fi>~fi,<else>~else,<od>~od,<fed>~fed,<Operator>~],<Operator>~<,<Operator>~>,<Operator>~==,<Operator>~<=,<Operator>~>=,<Operator>~<>,<Operator>~+,<Operator>~-,<Operator>~*,<Operator>~/,<Operator>~%,<not>~not,<then>~then,<do>~do,<or>~or,<and>~and,<Operator>~=,<Operator>~[,"1,2,3,4,5,6,7,8,9,0",<int>~int,<double>~double
+<program>,,"<fdecls>~<declarations>~<statement_seq>~.
+",<fdecls>~<declarations>~<statement_seq>~.,<fdecls>~<declarations>~<statement_seq>~.,"<fdecls>~<declarations>~<statement_seq>~.
+","<fdecls>~<declarations>~<statement_seq>~.
+","<fdecls>~<declarations>~<statement_seq>~.
+","<fdecls>~<declarations>~<statement_seq>~.
+","<fdecls>~<declarations>~<statement_seq>~.
+","<fdecls>~<declarations>~<statement_seq>~.
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<fdecls>,epsilon,epsilon,epsilon,,,,,,,<fdec>~;~<fdecls>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<fdec>,,,,,,,,,,def ~<type>~<id>~(~<params>~)~<declarations>~<statement_seq>~fed,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<params>,epsilon,<type>~<var>~<params_prime>,~<type>~<var>~<params_prime>,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<params_prime>,epsilon ,,,,,,,,,,epsilon,",~<params>",,,,,,,,,,,,,,,,,,,,,,,,,,,
+<declarations>,epsilon,<decl>~;~<declarations>,<decl>~;~<declarations>,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<decl>,,<type>~<varlist>,<type>~<varlist>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<type>,,"int 
+","double
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<varlist>,,,,,<var>~<varlist_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<varlist_prime>,epsilon,,,,,,,,epsilon,,,",~<varlist>",,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement_seq>,,,,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement_seq_prime>,epsilon,,,,,,,,";~<statement_seq>
+",,,,,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,
+<statement>,epsilon,,,if~<bexpr>~then~<statement_seq>~<statement_prime> ,<var>~=~<expr>,While~<bexpr>~do~<statement_seq>~od,print~<expr>,return~<expr> ,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement_prime>,,,,,,,,,,,,,,"fi 
+",else~<statement_seq>~fi,,,,,,,,,,,,,,,,,,,,,,,,
+<expr>,,,,,<term>~<expr_prime>,,,,,,,,<term>~<expr_prime>,,,,,,,,,,,,,,,,,,,,,,,,,<term>~<expr_prime>,<term>~<expr_prime>
+<expr_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,,,,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,~+~<term>~<expr_prime>,~-~<term>~<expr_prime>,,,,,,,,,,,,,
+<term>,,,,,<factor>~<term_prime>,,,,,,,,<factor>~<term_prime>,,,,,,,,,,,,,,,,,,,,,,,,,<factor>~<term_prime>,<factor>~<term_prime>
+<term_prime>,epsilon,,,,,,,,,,,,,,,,,,,,,,,,epsilon,epsilon,*~<factor>~<term_prime>,/~<factor>~<term_prime>,%~<factor>~<term_prime>,,,,,,,,,,
+<factor>,,,,,"<id>~<factor>
+",,,,,,,,(~<expr>~),,,,,,,,,,,,,,,,,,,,,,,,,<number> ,<number> 
+<factor_prime>,epsilon,,,,<var_prime>,,,,,,,epsilon,(~<exprseq>~),,,,,,,,,,,,,,epsilon,epsilon,epsilon,,,,,,epsilon,,,,
+<exprseq>,epsilon,,,,<expr>~<exprseq_prime>,,,,,,epsilon,,<expr>~<exprseq_prime>,,,,,,,,,,,,,,,,,,,,,,,,,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>
+<exprseq_prime>,epsilon,,,,,,,,,,epsilon,",~<exprseq>",,,,,,,,,,,,,,,,,,,,,,,,,,,
+<bexpr>,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,,,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,,,,,,,
+<bexpr_prime>,epsilon,,,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,epsilon,epsilon,or~<bterm>~<bexpr_prime>,,,,,,
+<bterm>,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,,,,,,
+<bterm_prime>,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,epsilon,and~<bfactor>~<bterm_prime>,,,,,
+<bfactor>,,,,,,,,,,,,,(<bexpr>) | (<expr> <comp> <expr>),,,,,,,,,,,,,,,,,not~<bfactor>,,,,,,,,,
+<comp>,,,,,,,,,,,,,,,,,,,<,>,==,<=,>=,<>,,,,,,,,,,,,,,,
+<var>,,,,,<id>~<var_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<var_prime>,epsilon,,,,,,,,,,,epsilon,,,,,,,,,,,,,,,epsilon,epsilon,epsilon,,,,,,epsilon,[~<expr>~],,,
+<letter>,,,,,"letter
+",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<digit>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,digit,,
+<id>,,,,,<letter>~<id_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<id_prime>,epsilon,,,,<letter>~<id_prime>,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,,,,epsilon,<digit>~<id_prime>,<digit>~<id_prime>,<digit>~<id_prime>
+<number>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,<integer>,<double>

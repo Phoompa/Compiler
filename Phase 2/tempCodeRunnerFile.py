@@ -1,2 +1,2 @@
 
-print("Lexical Analysis Complete")
+            if token[1].strip() == ')':

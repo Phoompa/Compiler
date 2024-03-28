@@ -26,109 +26,109 @@ def final_states_to_list(file_path): #function to convert finalStates.txt into a
 def getToken(state,file,IdentifierString): #function used to obtain token given a state
 
     if (state == 2): #Recognizes operator <=
-        file.write("<Operator> ~ <=")
+        file.write("<Operator>~<=")
     
     elif (state == 3): #Recognizes operator <>
-        file.write("<Operator> ~ <>")
+        file.write("<Operator>~<>")
         
     elif (state == 4): #Recognizes operator <
-        file.write("<Operator> ~ <")
+        file.write("<Operator>~<")
         
     elif (state == 6): #Recognizes operator ==
-        file.write("<Operator> ~ ==")
+        file.write("<Operator>~==")
     
     elif (state == 7): #Recognizes operator =
-        file.write("<Operator> ~ =")
+        file.write("<Operator>~=")
         
     elif (state == 9): #Recognizes operator >=
-        file.write("<Operator> ~ >=")
+        file.write("<Operator>~>=")
     
     elif (state == 10): #Recognizes operator >
-        file.write("<Operator> ~ >")
+        file.write("<Operator>~>")
         
     elif (state == 11): #Recognizes operator +
-        file.write("<Operator> ~ +")
+        file.write("<Operator>~+")
         
     elif (state == 12): #Recognizes operator -
-        file.write("<Operator> ~ -")
+        file.write("<Operator>~-")
         
     elif (state == 13): #Recognizes operator *
-        file.write("<Operator> ~ *")
+        file.write("<Operator>~*")
     
     elif (state == 14): #Recognizes operator /
-        file.write("<Operator> ~ /")
+        file.write("<Operator>~/")
     
     elif (state == 15): #Recognizes operator %
-        file.write("<Operator> ~ %")
+        file.write("<Operator>~%")
     
     elif (state == 16): #Recognizes operator ,
-        file.write("<Operator> ~ ,")
+        file.write("<Operator>~,")
     
     elif (state == 17): #Recognizes operator ;
-        file.write("<Operator> ~ ;")
+        file.write("<Operator>~;")
         
     elif (state == 18): #Recognizes operator (
-        file.write("<Operator> ~ (")
+        file.write("<Operator>~(")
         
     elif (state == 19): #Recognizes operator )
-        file.write("<Operator> ~ )")        
+        file.write("<Operator>~)")        
         
     elif (state == 21): #Recognizes Identifiers
-        file.write("<Identifier> ~ " + IdentifierString)
+        file.write("<Identifier>~" + IdentifierString)
 
     elif(state == 25): #Recognizes keyword and
-        file.write("<and> ~ and")
+        file.write("<and>~and")
     
     elif(state == 29): #Recognizes keyword def
-        file.write("<def> ~ def")
+        file.write("<def>~def")
     
     elif(state == 31): #Recognizes keyword do
-        file.write("<do> ~ do")
+        file.write("<do>~do")
 
     elif (state == 36): #Recognizes keyword else
-        file.write("<else> ~ else")
+        file.write("<else>~else")
     
     elif (state == 40): #Recognizes keyword fed
-        file.write("<fed> ~ fed")
+        file.write("<fed>~fed")
     
     elif (state == 42): #Recognizes keyword fi
-        file.write("<fi> ~ fi")
+        file.write("<fi>~fi")
 
     elif (state == 45): #Recognizes keyword if
-        file.write("<if> ~ if")
+        file.write("<if>~if")
     
     elif (state == 48): #Recognizes keyword od
-        file.write("<od> ~ od")
+        file.write("<od>~od")
 
     elif (state == 50): #Recognizes keyword or
-        file.write("<or> ~ or")
+        file.write("<or>~or")
     
     elif (state == 54): #Recognizes keyword not
-        file.write("<not> ~ not")
+        file.write("<not>~not")
 
     elif (state == 60): #Recognizes keyword print
-        file.write("<print> ~ print")
+        file.write("<print>~print")
 
     elif (state == 67): #Recognizes keyword return
-        file.write("<return> ~ return")
+        file.write("<return>~return")
     
     elif (state == 72): #Recognizes keyword then
-        file.write("<then> ~ then")
+        file.write("<then>~then")
 
     elif (state == 78): #Recognizes keyword while
-        file.write("<while> ~ while")
+        file.write("<while>~while")
 
     elif (state == 80): #Recognizes int
-        file.write("<int> ~ int")
+        file.write("<int>~int")
     
     elif (state == 83): #Recognizes double
-        file.write("<double> ~ double")
+        file.write("<double>~double")
         
     elif (state == 84) : #Recognizes [
-        file.write("<Operator> ~ [")
+        file.write("<Operator>~[")
         
     elif (state == 85) : #Recognizes ] 
-        file.write("<Operator> ~ ]")
+        file.write("<Operator>~]")
     file.write("\n")
 
 
