@@ -23,7 +23,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
         column = -1
         production.clear()
         
-        if A in TerminalSet or A == "$":
+        if A in TerminalSet or A == "END~$":
             
             r = r.split('~')
             if A == 'letter': #for this case, check to see if R is an identifier
@@ -33,8 +33,22 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
 
                 else:
                     print("Error, terminal letter is found but current token is not an <Identifier>")
-                
-            elif A == r[1]:
+            
+            elif A == 'INTEGER':
+                if r[0] == '<int>':
+                    stack.pop()
+                    print("Terminal successfully found and removed!")
+                else:
+                    print("Error, terminal INTEGER is found but current token is not an <int>")
+                    
+            elif A == 'DOUBLE':
+                if r[0] == '<double>':
+                    stack.pop()
+                    print("Terminal successfully found and removed!")
+                else:
+                    print("Error, terminal DOUBLE found but current token is not an <int>")
+            
+            elif A == r[1] or r[1] == '$':
                 stack.pop()
                 print("Terminal successfully found and removed!")
             else:
@@ -49,6 +63,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                     
             if row == -1: #row corresponding to production does not exist.
                 print("ERROR: Invalid Variable, not located in LL1 Table")
+                #BREAK HERE FOR TESTING
                 break
                 
             #get corresponding column number for r
@@ -66,6 +81,8 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                     print(LL1Table[0][5])
                 else:
                     print("ERROR: Invalid input token, not located in LL1 Table")
+                    #BREAK HERE FOR TESTING
+                    break
            
             #Now that you have the row and column, check to see if there is a production
             if LL1Table[row][column] != '': #production exists
@@ -77,10 +94,16 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                     stack.pop()
                     production = LL1Table[row][column].split('~')
                     for i in production [::-1]: #iterates through elements backwards and pushes them onto the stack
-                        stack.append(i)
+                        if i == 'def ':
+                            stack.append('def')
+                        else:
+                            if i != '':
+                                stack.append(i)
                     
             else:
                 print("Error, production for given row and column does not exist.")
+                #BREAK HERE FOR TESTING
+                break
                 position = position + 1
              
         print("Iteration Complete! stack: ")
@@ -96,7 +119,7 @@ tokens = []
 with open('output.txt', 'r') as file:
     for line in file:
         tokens.append(line.strip())
-    tokens.append("END , $")
+    tokens.append("END~$")
     
 # process tokens
 for i in range (len(tokens)):
@@ -133,6 +156,9 @@ print("Phase 2 Complete")
 #printing stack
 print("---------- START OF PHASE 2 ----------")
 stack = SyntaxAnalysis(VarSet, TerminalSet, tokens)
+print("---------- PHASE 2 COMPLETE----------")
+
+
 #print(stack)
 #print("---------- SET OF VARIABLES ----------")
 #print(VarSet)

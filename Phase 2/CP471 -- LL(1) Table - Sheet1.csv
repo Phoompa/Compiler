@@ -45,5 +45,5 @@ Variable,$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>~whi
 ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <digit>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,digit,,
 <id>,,,,,<letter>~<id_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-<id_prime>,epsilon,,,,<letter>~<id_prime>,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,,,,epsilon,<digit>~<id_prime>,<digit>~<id_prime>,<digit>~<id_prime>
-<number>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,<integer>,<double>
+<id_prime>,epsilon,,,,<letter>~<id_prime>,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,,,,epsilon,INTEGER~<id_prime>,INTEGER~<id_prime>,DOUBLE~<id_prime>
+<number>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,INTEGER,DOUBLE
