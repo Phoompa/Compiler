@@ -7,11 +7,11 @@ Variable,$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>~whi
 ","<fdecls>~<declarations>~<statement_seq>~.
 ","<fdecls>~<declarations>~<statement_seq>~.
 ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-<fdecls>,epsilon,epsilon,epsilon,,,,,,,<fdec>~;~<fdecls>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<fdecls>,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,<fdec>~;~<fdecls>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <fdec>,,,,,,,,,,def ~<type>~<id>~(~<params>~)~<declarations>~<statement_seq>~fed,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <params>,epsilon,<type>~<var>~<params_prime>,~<type>~<var>~<params_prime>,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <params_prime>,epsilon ,,,,,,,,,,epsilon,",~<params>",,,,,,,,,,,,,,,,,,,,,,,,,,,
-<declarations>,epsilon,<decl>~;~<declarations>,<decl>~;~<declarations>,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<declarations>,epsilon,<decl>~;~<declarations>,<decl>~;~<declarations>,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <decl>,,<type>~<varlist>,<type>~<varlist>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <type>,,"int 
 ","double
@@ -21,29 +21,29 @@ Variable,$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>~whi
 <statement_seq>,,,,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <statement_seq_prime>,epsilon,,,,,,,,";~<statement_seq>
 ",,,,,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,
-<statement>,epsilon,,,if~<bexpr>~then~<statement_seq>~<statement_prime> ,<var>~=~<expr>,While~<bexpr>~do~<statement_seq>~od,print~<expr>,return~<expr> ,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement>,epsilon,,,if~<bexpr>~then~<statement_seq>~<statement_prime> ,<var>~=~<expr>,While~<bexpr>~do~<statement_seq>~od,print~<expr>,return~<expr> ,epsilon,,,,,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,
 <statement_prime>,,,,,,,,,,,,,,"fi 
 ",else~<statement_seq>~fi,,,,,,,,,,,,,,,,,,,,,,,,
-<expr>,,,,,<term>~<expr_prime>,,,,,,,,<term>~<expr_prime>,,,,,,,,,,,,,,,,,,,,,,,,,<term>~<expr_prime>,<term>~<expr_prime>
-<expr_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,,,,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,~+~<term>~<expr_prime>,~-~<term>~<expr_prime>,,,,,,,,,,,,,
-<term>,,,,,<factor>~<term_prime>,,,,,,,,<factor>~<term_prime>,,,,,,,,,,,,,,,,,,,,,,,,,<factor>~<term_prime>,<factor>~<term_prime>
-<term_prime>,epsilon,,,,,,,,,,,,,,,,,,,,,,,,epsilon,epsilon,*~<factor>~<term_prime>,/~<factor>~<term_prime>,%~<factor>~<term_prime>,,,,,,,,,,
+<expr>,,,,,<term>~<expr_prime>,,,,,,,,<term>~<expr_prime>,,,,,,,,,,,,<term>~<expr_prime>,<term>~<expr_prime>,<term>~<expr_prime>,<term>~<expr_prime>,<term>~<expr_prime>,,,,,,,,,<term>~<expr_prime>,<term>~<expr_prime>
+<expr_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,~+~<term>~<expr_prime>,~-~<term>~<expr_prime>,,,,,,,,,,,,,
+<term>,,,,,<factor>~<term_prime>,,,,,,,,<factor>~<term_prime>,,,,,,,,,,,,,,<factor>~<term_prime>,<factor>~<term_prime>,<factor>~<term_prime>,,,,,,,,,<factor>~<term_prime>,<factor>~<term_prime>
+<term_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,*~<factor>~<term_prime>,/~<factor>~<term_prime>,%~<factor>~<term_prime>,,,,,,,,,,
 <factor>,,,,,"<id>~<factor>
-",,,,,,,,(~<expr>~),,,,,,,,,,,,,,,,,,,,,,,,,<number> ,<number> 
-<factor_prime>,epsilon,,,,<var_prime>,,,,,,,epsilon,(~<exprseq>~),,,,,,,,,,,,,,epsilon,epsilon,epsilon,,,,,,epsilon,,,,
-<exprseq>,epsilon,,,,<expr>~<exprseq_prime>,,,,,,epsilon,,<expr>~<exprseq_prime>,,,,,,,,,,,,,,,,,,,,,,,,,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>
+",,,,,,,,(~<expr>~),,,,,,,,,,,,,,,,,,,,,,,<var_prime>,,<number> ,<number> 
+<factor_prime>,epsilon,,,,<var_prime>,,,,epsilon,,epsilon,epsilon,(~<exprseq>~),epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,epsilon,,,,
+<exprseq>,epsilon,,,,<expr>~<exprseq_prime>,,,,,,epsilon,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,,,,,,,,,,,,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,,,,,,,,,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>
 <exprseq_prime>,epsilon,,,,,,,,,,epsilon,",~<exprseq>",,,,,,,,,,,,,,,,,,,,,,,,,,,
 <bexpr>,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,,,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,,,,,,,
 <bexpr_prime>,epsilon,,,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,epsilon,epsilon,or~<bterm>~<bexpr_prime>,,,,,,
 <bterm>,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,,,,,,
-<bterm_prime>,epsilon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,epsilon,and~<bfactor>~<bterm_prime>,,,,,
-<bfactor>,,,,,,,,,,,,,(<bexpr>) | (<expr> <comp> <expr>),,,,,,,,,,,,,,,,,not~<bfactor>,,,,,,,,,
+<bterm_prime>,epsilon,,,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,epsilon,epsilon,epsilon,and~<bfactor>~<bterm_prime>,,,,,
+<bfactor>,epsilon,,,,,,,,,,epsilon,,(<bexpr>) | (<expr> <comp> <expr>),,,,,,,,,,,,,,,,,not~<bfactor>,epsilon,epsilon,epsilon,epsilon,,,,,
 <comp>,,,,,,,,,,,,,,,,,,,<,>,==,<=,>=,<>,,,,,,,,,,,,,,,
 <var>,,,,,<id>~<var_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-<var_prime>,epsilon,,,,,,,,,,,epsilon,,,,,,,,,,,,,,,epsilon,epsilon,epsilon,,,,,,epsilon,[~<expr>~],,,
+<var_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,epsilon,[~<expr>~],,,
 <letter>,,,,,"letter
 ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <digit>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,digit,,
 <id>,,,,,<letter>~<id_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-<id_prime>,epsilon,,,,<letter>~<id_prime>,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,,,,epsilon,INTEGER~<id_prime>,INTEGER~<id_prime>,DOUBLE~<id_prime>
+<id_prime>,epsilon,,,,<letter>~<id_prime>,,,,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,epsilon,epsilon,INTEGER~<id_prime>,INTEGER~<id_prime>,DOUBLE~<id_prime>
 <number>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,INTEGER,DOUBLE

@@ -109,7 +109,11 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
         print("Iteration Complete! stack: ")
         print(stack)
         iterations = iterations + 1
-        if iterations > 100 or position >= len(tokens):
+        if iterations > 25:
+            print("Maximum number of iterations exceeded")
+            break
+        if position >= len(tokens):
+            print("ERROR, list of tokens ran out before stack was empty")
             break 
         
     return stack
