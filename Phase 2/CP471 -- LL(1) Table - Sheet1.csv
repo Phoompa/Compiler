@@ -18,7 +18,7 @@ Variable,END~$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>
 ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <varlist>,,,,,<var>~<varlist_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <varlist_prime>,epsilon,,,,,,,,epsilon,,,",~<varlist>",,,,,,,,,,,,,,,,,,,,,,,,,,,
-<statement_seq>,,,,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+<statement_seq>,epsilon,,,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,<statement>~<statement_seq_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <statement_seq_prime>,epsilon,,,,,,,,";~<statement_seq>
 ",,,,,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,
 <statement>,epsilon,,,if~<bexpr>~then~<statement_seq>~<statement_prime> ,<var>~=~<expr>,While~<bexpr>~do~<statement_seq>~od,print~<expr>,return~<expr> ,epsilon,,,,,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,

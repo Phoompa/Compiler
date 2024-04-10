@@ -18,6 +18,8 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
         A = stack[-1].lower() #symbol at the top of the stack
        
         print("Symbol at the top of the stack: " + A)
+        if position >= len(tokens):
+            break
         r = tokens[position] #current token
         print("Current token: " + r)
         row = -1
@@ -36,7 +38,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
 
                 else:
                     print("Error, terminal letter is found but current token is not an <Identifier>")
-                    break
+                    #break
             
             elif A == 'integer':
                 if r[0] == '<int>':
@@ -52,7 +54,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                     print("Terminal successfully found and removed!")
                 else:
                     print("Error, terminal DOUBLE found but current token is not an <int>")
-                    break
+                    #break
             
             elif A == r[1] or r[1] == '$':
                 stack.pop()
@@ -64,13 +66,14 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                 if A == '=' and r[1] == '*':
                     stack.pop()
                 else:
-                    break
+                    temp = 1
+                    #break
             print("Testing")
             if A != '.':
                 position = position + 1
-            print(tokens[position])
+           # print(tokens[position])
             #position = position + 1
-            print(tokens[position])
+            #print(tokens[position])
             print("TESTING FINISHED")
         
         elif A in VarSet:
@@ -82,7 +85,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
             if row == -1: #row corresponding to production does not exist.
                 print("ERROR: Invalid Variable, not located in LL1 Table")
                 #BREAK HERE FOR TESTING
-                break
+                #break
                 
             #get corresponding column number for r
             
@@ -100,7 +103,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                 else:
                     print("ERROR: Invalid input token, not located in LL1 Table")
                     #BREAK HERE FOR TESTING
-                    break
+                    #break
            
             #Now that you have the row and column, check to see if there is a production
             if LL1Table[row][column] != '': #production exists
@@ -122,7 +125,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
             else:
                 print("Error, production for given row and column does not exist.")
                 #BREAK HERE FOR TESTING
-                break
+                #break
                 position = position + 1
                 
         
@@ -185,7 +188,7 @@ print("Phase 2 Complete")
 print("---------- START OF PHASE 2 ----------")
 stack = SyntaxAnalysis(VarSet, TerminalSet, tokens)
 print("---------- PHASE 2 COMPLETE----------")
-print(tokens)
+#print(tokens)
 
 
 #print(stack)
