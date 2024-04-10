@@ -15,16 +15,19 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
     column = 0 #Represents column in LL1Table
  #Note: When pushing a terminal to the stack, do not use < > brackets
     while(len(stack) > 0):
-        A = stack[-1] #symbol at the top of the stack
+        A = stack[-1].lower() #symbol at the top of the stack
+       
         print("Symbol at the top of the stack: " + A)
         r = tokens[position] #current token
         print("Current token: " + r)
         row = -1
         column = -1
         production.clear()
+        print(A)
         
+      
+       
         if A in TerminalSet or A == "END~$":
-            
             r = r.split('~')
             if A == 'letter': #for this case, check to see if R is an identifier
                 if r[0] == '<Identifier>':
@@ -33,27 +36,42 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
 
                 else:
                     print("Error, terminal letter is found but current token is not an <Identifier>")
+                    break
             
-            elif A == 'INTEGER':
+            elif A == 'integer':
                 if r[0] == '<int>':
                     stack.pop()
                     print("Terminal successfully found and removed!")
                 else:
                     print("Error, terminal INTEGER is found but current token is not an <int>")
+                    break
                     
-            elif A == 'DOUBLE':
+            elif A == 'double':
                 if r[0] == '<double>':
                     stack.pop()
                     print("Terminal successfully found and removed!")
                 else:
                     print("Error, terminal DOUBLE found but current token is not an <int>")
+                    break
             
             elif A == r[1] or r[1] == '$':
                 stack.pop()
                 print("Terminal successfully found and removed!")
             else:
                 print("ERROR: Terminal found at the top of the stack, but current token does not match")
-            position = position + 1
+                print("A: " + str(A))
+                print("r " + r[1])
+                if A == '=' and r[1] == '*':
+                    stack.pop()
+                else:
+                    break
+            print("Testing")
+            if A != '.':
+                position = position + 1
+            print(tokens[position])
+            #position = position + 1
+            print(tokens[position])
+            print("TESTING FINISHED")
         
         elif A in VarSet:
             #get corresponding row number for A
@@ -89,6 +107,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                 
                 if LL1Table[row][column] == "epsilon": #current token is a follow set
                     stack.pop()
+                    print("Epsilon pop")
                 
                 else: #current token is a part of the first set
                     stack.pop()
@@ -105,11 +124,16 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                 #BREAK HERE FOR TESTING
                 break
                 position = position + 1
+                
+        
              
         print("Iteration Complete! stack: ")
         print(stack)
         iterations = iterations + 1
-        if iterations > 25:
+        print("Iterations: " + str(iterations))
+        print("TESTING")
+       
+        if iterations > 400:
             print("Maximum number of iterations exceeded")
             break
         if position >= len(tokens):
@@ -161,6 +185,7 @@ print("Phase 2 Complete")
 print("---------- START OF PHASE 2 ----------")
 stack = SyntaxAnalysis(VarSet, TerminalSet, tokens)
 print("---------- PHASE 2 COMPLETE----------")
+print(tokens)
 
 
 #print(stack)

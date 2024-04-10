@@ -165,14 +165,14 @@ def lexical_analysis(transition_table, keywords, final_states, decrement_final_s
                         if (65 <= ord(buffer1[i-1]) <= 90) or (97 <= ord(buffer1[i-1]) <= 122):
                             #IdentifierString = IdentifierString + buffer1[i-1]
                             #IdentifierStringbuffer = 1
-                            print("")
+                            temp = 1
+                            #print("")
                     IdentifierString = IdentifierString + buffer1[i]
 
 
                 if current in final_states: #Final state reached
                     #print("final state reached: ")
                     getToken(current,output_file,IdentifierString)
-                    print(IdentifierString)
                     IdentifierString = '' #reset identifier String
                     IdentifierStringbuffer = 0
                     first = 0

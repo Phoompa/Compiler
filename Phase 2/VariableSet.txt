@@ -14,8 +14,10 @@
 <statement_prime>
 <expr>
 <expr_prime>
+<expr_prime_prime>
 <term>
 <term_prime>
+<term_prime_prime>
 <factor>
 <factor_prime>
 <exprseq>

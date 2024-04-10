@@ -1,4 +1,4 @@
-Variable,$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>~while,<print>~print,<return>~return,<Operator>~;,<def>~def,<Operator>~),"<Operator>~,",<Operator>~(,<fi>~fi,<else>~else,<od>~od,<fed>~fed,<Operator>~],<Operator>~<,<Operator>~>,<Operator>~==,<Operator>~<=,<Operator>~>=,<Operator>~<>,<Operator>~+,<Operator>~-,<Operator>~*,<Operator>~/,<Operator>~%,<not>~not,<then>~then,<do>~do,<or>~or,<and>~and,<Operator>~=,<Operator>~[,"1,2,3,4,5,6,7,8,9,0",<int>~int,<double>~double
+Variable,END~$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>~while,<print>~print,<return>~return,<Operator>~;,<def>~def,<Operator>~),"<Operator>~,",<Operator>~(,<fi>~fi,<else>~else,<od>~od,<fed>~fed,<Operator>~],<Operator>~<,<Operator>~>,<Operator>~==,<Operator>~<=,<Operator>~>=,<Operator>~<>,<Operator>~+,<Operator>~-,<Operator>~*,<Operator>~/,<Operator>~%,<not>~not,<then>~then,<do>~do,<or>~or,<and>~and,<Operator>~=,<Operator>~[,"1,2,3,4,5,6,7,8,9,0",<int>~int,<double>~double
 <program>,,"<fdecls>~<declarations>~<statement_seq>~.
 ",<fdecls>~<declarations>~<statement_seq>~.,<fdecls>~<declarations>~<statement_seq>~.,"<fdecls>~<declarations>~<statement_seq>~.
 ","<fdecls>~<declarations>~<statement_seq>~.
@@ -24,20 +24,21 @@ Variable,$,<Identifier>~int,<Identifier>~double,<if>~if,<Identifier>,<while>~whi
 <statement>,epsilon,,,if~<bexpr>~then~<statement_seq>~<statement_prime> ,<var>~=~<expr>,While~<bexpr>~do~<statement_seq>~od,print~<expr>,return~<expr> ,epsilon,,,,,epsilon,epsilon,epsilon,epsilon,,,,,,,,,,,,,,,,,,,,,,
 <statement_prime>,,,,,,,,,,,,,,"fi 
 ",else~<statement_seq>~fi,,,,,,,,,,,,,,,,,,,,,,,,
-<expr>,,,,,<term>~<expr_prime>,,,,,,,,<term>~<expr_prime>,,,,,,,,,,,,<term>~<expr_prime>,<term>~<expr_prime>,<term>~<expr_prime>,<term>~<expr_prime>,<term>~<expr_prime>,,,,,,,,,<term>~<expr_prime>,<term>~<expr_prime>
-<expr_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,~+~<term>~<expr_prime>,~-~<term>~<expr_prime>,,,,,,,,,,,,,
-<term>,,,,,<factor>~<term_prime>,,,,,,,,<factor>~<term_prime>,,,,,,,,,,,,,,<factor>~<term_prime>,<factor>~<term_prime>,<factor>~<term_prime>,,,,,,,,,<factor>~<term_prime>,<factor>~<term_prime>
-<term_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,*~<factor>~<term_prime>,/~<factor>~<term_prime>,%~<factor>~<term_prime>,,,,,,,,,,
-<factor>,,,,,"<id>~<factor>
-",,,,,,,,(~<expr>~),,,,,,,,,,,,,,,,,,,,,,,<var_prime>,,<number> ,<number> 
+<expr>,,<term>~<expr_prime_prime>,<term>~<expr_prime_prime>,,<term>~<expr_prime_prime>,,,,,,,,<term>~<expr_prime_prime>,,,,,,,,,,,,,,,,,,,,,,,,,<term>~<expr_prime_prime>,<term>~<expr_prime_prime>
+<expr_prime>,,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,~+~<term>,~-~<term>,,,,,,,,,,,,,
+<expr_prime_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,<expr_prime>~<expr_prime_prime>,<expr_prime>~<expr_prime_prime>,,,,,,,,,,,,,
+<term>,,,,,<factor>~<term_prime_prime>,,,,,,,,<factor>~<term_prime_prime>,,,,,,,,,,,,,,<factor>~<term_prime>,<factor>~<term_prime>,<factor>~<term_prime>,,,,,,,,,<factor>~<term_prime_prime>,<factor>~<term_prime_prime>
+<term_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,*~<factor>,/~<factor>,%~<factor>,,,,,,,,,,
+<term_prime_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,<term_prime>~<term_prime_prime>,<term_prime>~<term_prime_prime>,<term_prime>~<term_prime_prime>,,,,,,,,,,
+<factor>,,,,,<id>~<factor_prime>,,,,,,,,(~<expr>~),,,,,,,,,,,,,,,,,,,,,,,,,<number> ,<number> 
 <factor_prime>,epsilon,,,,<var_prime>,,,,epsilon,,epsilon,epsilon,(~<exprseq>~),epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,epsilon,,,,
 <exprseq>,epsilon,,,,<expr>~<exprseq_prime>,,,,,,epsilon,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,,,,,,,,,,,,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>,,,,,,,,,<expr>~<exprseq_prime>,<expr>~<exprseq_prime>
 <exprseq_prime>,epsilon,,,,,,,,,,epsilon,",~<exprseq>",,,,,,,,,,,,,,,,,,,,,,,,,,,
-<bexpr>,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,,,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,,,,,,,
+<bexpr>,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,,,,,,,,,,,,,,,<bterm>~<bexpr_prime>,,,<bterm>~<bexpr_prime>,<bterm>~<bexpr_prime>,,,,,
 <bexpr_prime>,epsilon,,,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,epsilon,epsilon,or~<bterm>~<bexpr_prime>,,,,,,
-<bterm>,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,,,,,,
+<bterm>,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,,,,,,,,,,,,,,<bfactor>~<bterm_prime>,,,,<bterm_prime>,,,,,
 <bterm_prime>,epsilon,,,,,,,,,,epsilon,,,,,,,,,,,,,,,,,,,,epsilon,epsilon,epsilon,and~<bfactor>~<bterm_prime>,,,,,
-<bfactor>,epsilon,,,,,,,,,,epsilon,,(<bexpr>) | (<expr> <comp> <expr>),,,,,,,,,,,,,,,,,not~<bfactor>,epsilon,epsilon,epsilon,epsilon,,,,,
+<bfactor>,epsilon,,,,,,,,,,,,(~<expr>~<comp>~<expr>~),,,,,,,,,,,,,,,,,not~<bfactor>,,,<bexpr>,<bexpr>,,,,,
 <comp>,,,,,,,,,,,,,,,,,,,<,>,==,<=,>=,<>,,,,,,,,,,,,,,,
 <var>,,,,,<id>~<var_prime>,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 <var_prime>,epsilon,,,,,,,,epsilon,,epsilon,epsilon,,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,epsilon,,,,,,epsilon,[~<expr>~],,,
