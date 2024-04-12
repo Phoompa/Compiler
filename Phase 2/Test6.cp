@@ -17,7 +17,7 @@ x=12; y=15;
 
 z=gcd(x,y);
 print(z);
-
+int q;
 z=gcd(x+y, y);
 print(z);
 

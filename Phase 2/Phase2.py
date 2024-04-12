@@ -4,22 +4,24 @@ import sys
 
 
 
-def SyntaxAnalysis(VarSet, TerminalSet, tokens):
+def SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable):
     iterations = 0
     position = 0
     startSymbol = "<program>"
     stack = []
     production = []
+    Variables = []
     stack.append(startSymbol)
     row = 0 #Represents row in LL1Table
     column = 0 #Represents column in LL1Table
+    type = '~N/A'
  #Note: When pushing a terminal to the stack, do not use < > brackets
     while(len(stack) > 0):
         A = stack[-1].lower() #symbol at the top of the stack
        
         print("Symbol at the top of the stack: " + A)
-        if position >= len(tokens):
-            break
+        #if position >= len(tokens):
+            #break
         r = tokens[position] #current token
         print("Current token: " + r)
         row = -1
@@ -27,18 +29,44 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
         production.clear()
         print(A)
         
-      
+        
+        print(type)
        
         if A in TerminalSet or A == "END~$":
             r = r.split('~')
+            #Phase 3 stuff
+            #if r[0] == "<Identifier>":
+                #if r[1] not in Variables:
+                    #Variables.append(r[1])
+            if r[0] != "<Identifier>" and tokens[position] != '<Operator>~,' and A != '=':
+              type = '~N/A'
+            
+            if r[0] == '<Identifier>': #for appending any variables to SymbolTable
+                if r[1] == 'int':   # type int recognized
+                    type = '~int'   
+                elif r[1] == 'double' or r[1] == 'duble':  #type double recognized
+                    type = '~double'
+                elif tokens[position]+type not in  SymbolTable: #and tokens[position-2] != '<def>~def':
+                    if r[1] not in Variables:
+                        SymbolTable.append(tokens[position]+type)
+
+            if r[0] == "<Identifier>":
+                if r[1] not in Variables:
+                    if r[1] != 'int' and r[1] != 'double' and r[1] != 'duble':
+                        #if tokens[position-2] != '<def>~def':
+                        Variables.append(r[1])
+                            #print(tokens[position-2])
+            
+            
             if A == 'letter': #for this case, check to see if R is an identifier
                 if r[0] == '<Identifier>':
+                    #SymbolTable.append(tokens[position])
                     stack.pop()
                     print("Terminal successfully found and removed!")
 
                 else:
                     print("Error, terminal letter is found but current token is not an <Identifier>")
-                    #break
+                    break
             
             elif A == 'integer':
                 if r[0] == '<int>':
@@ -57,24 +85,27 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                     #break
             
             elif A == r[1] or r[1] == '$':
+                #if r[1] == ',': # for symbol table
+                    #SymbolTable.append(tokens[position])
                 stack.pop()
                 print("Terminal successfully found and removed!")
             else:
                 print("ERROR: Terminal found at the top of the stack, but current token does not match")
-                print("A: " + str(A))
-                print("r " + r[1])
-                if A == '=' and r[1] == '*':
+                #print("A: " + str(A))
+                #print("r " + r[1])
+                if A == '=' and r[1] == '*':  #This successfully handles the issue I have with handling = when <var>=<expr> is pushed onto the stack
                     stack.pop()
                 else:
                     temp = 1
+                    position = position + 1
                     #break
-            print("Testing")
+            #print("Testing")
             if A != '.':
                 position = position + 1
            # print(tokens[position])
             #position = position + 1
             #print(tokens[position])
-            print("TESTING FINISHED")
+            #print("TESTING FINISHED")
         
         elif A in VarSet:
             #get corresponding row number for A
@@ -98,8 +129,8 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                 r = r.split('~')
                 if r[0] == '<Identifier>':
                     column = 5
-                    print("Successfully handled <Identifier>")
-                    print(LL1Table[0][5])
+                    #print("Successfully handled <Identifier>")
+                    #print(LL1Table[0][5])
                 else:
                     print("ERROR: Invalid input token, not located in LL1 Table")
                     #BREAK HERE FOR TESTING
@@ -110,7 +141,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                 
                 if LL1Table[row][column] == "epsilon": #current token is a follow set
                     stack.pop()
-                    print("Epsilon pop")
+                    #print("Epsilon pop")
                 
                 else: #current token is a part of the first set
                     stack.pop()
@@ -130,11 +161,10 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
                 
         
              
-        print("Iteration Complete! stack: ")
-        print(stack)
+        print(f"Iteration Complete! stack: {stack}")
         iterations = iterations + 1
-        print("Iterations: " + str(iterations))
-        print("TESTING")
+        #print("Iterations: " + str(iterations))
+        #print("TESTING")
        
         if iterations > 400:
             print("Maximum number of iterations exceeded")
@@ -142,8 +172,8 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens):
         if position >= len(tokens):
             print("ERROR, list of tokens ran out before stack was empty")
             break 
-        
-    return stack
+    print(Variables)  
+    return stack, SymbolTable
 
 #Putting tokens into an array
 tokens = []
@@ -183,12 +213,13 @@ for i in range(len(LL1Table)):
     for j in range(len(LL1Table[i])):
         LL1Table[i][j] = LL1Table[i][j].strip()
 
-print("Phase 2 Complete")
+#Initialize Symbol table
 #printing stack
+SymbolTable = []
 print("---------- START OF PHASE 2 ----------")
-stack = SyntaxAnalysis(VarSet, TerminalSet, tokens)
+stack, SymbolTable = SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable)
 print("---------- PHASE 2 COMPLETE----------")
-#print(tokens)
+print(f"Symbol Table: {SymbolTable}")
 
 
 #print(stack)
