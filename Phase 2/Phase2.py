@@ -1,6 +1,20 @@
 import csv
 import sys
-#REMEMBER WHEN APPENDING A PRODUCTION DO IT BACKWARDS
+class Symbol:
+    def __init__(self,identifier, type, scope, isMethod):
+        self.identifier = identifier,
+        self.type = type
+        self.scope = scope
+        self.isMethod = isMethod
+        
+    def equals (self, Symbol1, Symbol2):
+        if(Symbol1.identifier == Symbol2.identifier and Symbol1.type == Symbol2.type and Symbol1.scope == Symbol2.scope and Symbol1.isMethod == Symbol2.isMethod):
+            return True
+        return False
+    
+    def printSymbol(self, Symbol):
+        print(f"{Symbol.identifier}, {Symbol.type}, {Symbol.scope}, {Symbol.isMethod}")
+        return
 
 
 
@@ -14,7 +28,11 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable):
     stack.append(startSymbol)
     row = 0 #Represents row in LL1Table
     column = 0 #Represents column in LL1Table
+    
+    isMethod = False #variables for semantic analysis
     type = '~N/A'
+    scope = 'GLOBAL'
+    
  #Note: When pushing a terminal to the stack, do not use < > brackets
     while(len(stack) > 0):
         A = stack[-1].lower() #symbol at the top of the stack
@@ -31,7 +49,9 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable):
         
         
         print(type)
-       
+        if r == '<fed>~fed':
+            scope = 'GLOBAL'
+            
         if A in TerminalSet or A == "END~$":
             r = r.split('~')
             #Phase 3 stuff
@@ -39,18 +59,34 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable):
                 #if r[1] not in Variables:
                     #Variables.append(r[1])
             if r[0] != "<Identifier>" and tokens[position] != '<Operator>~,' and A != '=':
-              type = '~N/A'
+              type = 'N/A'
+              
+            #if r[1] == 'fed':
+                #type = 'GLOBAL'
+                
+               
+            
             
             if r[0] == '<Identifier>': #for appending any variables to SymbolTable
                 if r[1] == 'int':   # type int recognized
-                    type = '~int'   
+                    type = 'int'   
                 elif r[1] == 'double' or r[1] == 'duble':  #type double recognized
-                    type = '~double'
+                    type = 'double'
                 elif tokens[position]+type not in  SymbolTable: #and tokens[position-2] != '<def>~def':
                     if r[1] not in Variables:
-                        SymbolTable.append(tokens[position]+type)
+                        if tokens[position-2] == '<def>~def':
+                            isMethod = True
+                            SymbolTable.append(Symbol(r[1], type, scope, isMethod))
+                            scope = 'LOCAL'
+                        else:
+                            isMethod = False
+                            SymbolTable.append(Symbol(r[1], type, scope, isMethod))
 
+                        if type == 'N/A':
+                            print("ERROR: Variable has not been initialized with a type")
+                        
             if r[0] == "<Identifier>":
+                print(r[0])
                 if r[1] not in Variables:
                     if r[1] != 'int' and r[1] != 'double' and r[1] != 'duble':
                         #if tokens[position-2] != '<def>~def':
@@ -97,12 +133,14 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable):
                     stack.pop()
                 else:
                     temp = 1
-                    position = position + 1
+                    #position = position + 1
                     #break
             #print("Testing")
             if A != '.':
                 position = position + 1
-           # print(tokens[position])
+            else:
+                break
+           #print(tokens[position])
             #position = position + 1
             #print(tokens[position])
             #print("TESTING FINISHED")
@@ -166,7 +204,7 @@ def SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable):
         #print("Iterations: " + str(iterations))
         #print("TESTING")
        
-        if iterations > 400:
+        if iterations > 500:
             print("Maximum number of iterations exceeded")
             break
         if position >= len(tokens):
@@ -219,8 +257,9 @@ SymbolTable = []
 print("---------- START OF PHASE 2 ----------")
 stack, SymbolTable = SyntaxAnalysis(VarSet, TerminalSet, tokens, SymbolTable)
 print("---------- PHASE 2 COMPLETE----------")
-print(f"Symbol Table: {SymbolTable}")
-
+for i in SymbolTable:
+    print(f"{i.identifier}, {i.type}, {i.scope}, {i.isMethod}")
+    
 
 #print(stack)
 #print("---------- SET OF VARIABLES ----------")
